@@ -18,6 +18,19 @@ GithubAnalytics.jl is a Julia package that provides comprehensive analytics for 
 - **Temporal Analysis**: Analyzes trends in issue resolution time and commit activity
 - **Flexible Output**: Generates CSV data files, markdown reports, and visualizations
 
+## Example Visualizations
+> ![](./organalysis_2025-05-02_200803/issue_close_time_distribution.png)
+> ![](./organalysis_2025-05-02_200803/issue_close_time_trend.png)
+> ![](./organalysis_2025-05-02_200803/issue_close_time_violin.png)
+> ![](./organalysis_2025-05-02_200803/issue_status_percentage.png)
+> ![](./organalysis_2025-05-02_200803/issue_status_stacked.png)
+> ![](./organalysis_2025-05-02_200803/language_distribution_pie.png)
+> ![](./organalysis_2025-05-02_200803/overall_commit_activity.png)
+> ![](./organalysis_2025-05-02_200803/overall_issue_distribution_pie.png)
+> ![](./organalysis_2025-05-02_200803/pull_request_summary.png)
+> ![](./organalysis_2025-05-02_200803/top_contributors.png)
+> ![](./organalysis_2025-05-02_200803/top_repos_by_stars.png)
+
 ## Installation
 
 ```julia
