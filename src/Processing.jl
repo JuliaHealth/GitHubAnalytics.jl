@@ -26,6 +26,9 @@ struct ProcessedData
     overall_commit_activity::DataFrame # Aggregated commit counts per date
     language_distribution::DataFrame # Count per primary language
     overall_stats::Dict{String, Any} # Org-level summary stats (totals, averages)
+    
+    # Issue close time distribution data
+    issue_close_times::DataFrame # Data on how long it takes to close issues
 
     # Store Fetch Results/Errors for reference
     fetch_results::Dict{String, Any}
@@ -61,6 +64,14 @@ function process_data(
     all_contrib_metrics_list = ContributorMetrics[]
     all_commit_history_list = CommitHistoryEntry[]
     language_counts = Dict{Union{String, Nothing}, Int}()
+    
+    # Initialize issue close time tracking
+    issue_close_times_data = DataFrame(
+        repo_name = String[],
+        issue_number = Int[],
+        close_time_days = Float64[],
+        closed_at = DateTime[]
+    )
 
     # Process only repos where basic info succeeded
     repo_names_processed = keys(fetched_data.basic_info)
@@ -82,6 +93,33 @@ function process_data(
             if isa(repo_issues, Vector{GitHub.Issue})
                 open_issues_count = count(i -> i.state == "open", repo_issues)
                 closed_issues_count = length(repo_issues) - open_issues_count
+                
+                # Calculate issue close times for closed issues
+                for issue in repo_issues
+                    if issue.state == "closed" && !isnothing(issue.closed_at) && !isnothing(issue.created_at)
+                        try
+                            created_at = DateTime(issue.created_at)
+                            closed_at = DateTime(issue.closed_at)
+                            
+                            # Calculate time to close in days
+                            close_time_days = (closed_at - created_at).value / (1000 * 60 * 60 * 24)
+                            
+                            # Only include positive close times (avoid data errors)
+                            if close_time_days >= 0
+                                push!(issue_close_times_data, (
+                                    repo_name,
+                                    issue.number,
+                                    close_time_days,
+                                    closed_at
+                                ))
+                            else
+                                @warn "Negative issue close time for $(repo_name)#$(issue.number): $(close_time_days) days"
+                            end
+                        catch e
+                            @warn "Error calculating close time for issue" repo=repo_name issue=issue.number exception=e
+                        end
+                    end
+                end
             else
                 @warn "Issue data for $repo_name is not a Vector{GitHub.Issue}, skipping issue processing." issues_data_type=typeof(repo_issues)
             end
@@ -283,6 +321,68 @@ function process_data(
     )
     @info "Calculated overall statistics."
 
+    # After the aggregation of all data, log the issue close time stats
+    if !isempty(issue_close_times_data)
+        issue_stats = Dict{String, Any}()
+        issue_stats["total_closed_issues_with_data"] = nrow(issue_close_times_data)
+        issue_stats["mean_close_time_days"] = mean(issue_close_times_data.close_time_days)
+        issue_stats["median_close_time_days"] = median(issue_close_times_data.close_time_days)
+        issue_stats["max_close_time_days"] = maximum(issue_close_times_data.close_time_days)
+        issue_stats["min_close_time_days"] = minimum(issue_close_times_data.close_time_days)
+        
+        # Add percentiles
+        issue_stats["p25_close_time_days"] = quantile(issue_close_times_data.close_time_days, 0.25)
+        issue_stats["p75_close_time_days"] = quantile(issue_close_times_data.close_time_days, 0.75)
+        issue_stats["p90_close_time_days"] = quantile(issue_close_times_data.close_time_days, 0.90)
+        
+        @info "Issue close time statistics calculated" stats=issue_stats
+    else
+        @info "No issue close time data available for analysis"
+    end
+    
+    # --- Create Overall Stats ---
+    overall_stats = Dict{String, Any}()
+    # Total repos successfully processed
+    overall_stats["total_repos_processed"] = length(processed_repo_metrics)
+    # Total issues (open and closed)
+    overall_stats["total_issues"] = sum(r.total_issues for r in values(processed_repo_metrics))
+    overall_stats["total_open_issues"] = sum(r.open_issues for r in values(processed_repo_metrics))
+    overall_stats["total_closed_issues"] = sum(r.closed_issues for r in values(processed_repo_metrics))
+    # Issue resolution rate across all repos
+    if overall_stats["total_issues"] > 0
+        overall_stats["overall_issue_resolution_rate"] = overall_stats["total_closed_issues"] / overall_stats["total_issues"]
+    else
+        overall_stats["overall_issue_resolution_rate"] = nothing
+    end
+    
+    # --- Prepare Language Distribution DataFrame ---
+    lang_df = DataFrame(language = String[], count = Int[])
+    for (lang, count) in language_counts
+        if isnothing(lang)
+            push!(lang_df, ("Unknown", count))
+        else
+            push!(lang_df, (lang, count))
+        end
+    end
+    sort!(lang_df, :count, rev=true)
+
+    # --- Prepare Overall Commit Activity DataFrame ---
+    commit_activity_df = DataFrame(date = Date[], commit_count = Int[])
+    if !isempty(all_commit_history_list)
+        # Extract all dates with commit activity
+        commit_dates = [Date(c.committer_date) for c in all_commit_history_list if c.committer_date != DateTime(0)]
+        date_counts = Dict{Date, Int}()
+        for date in commit_dates
+            date_counts[date] = get(date_counts, date, 0) + 1
+        end
+        
+        # Convert to sorted DataFrame
+        for (date, count) in date_counts
+            push!(commit_activity_df, (date, count))
+        end
+        sort!(commit_activity_df, :date)
+    end
+
     # --- Construct the final ProcessedData object ---
     processed_data = ProcessedData(
         config, # Store config
@@ -291,9 +391,10 @@ function process_data(
         # all_contrib_metrics_list, # Decide if raw lists are needed
         # all_commit_history_list,  # in the final output struct
         contrib_summary_df,
-        overall_commit_df,
+        commit_activity_df,
         lang_df, # Add language DF
         overall_stats,
+        issue_close_times_data,
         fetched_data.fetch_results # Pass fetch results through
     )
 

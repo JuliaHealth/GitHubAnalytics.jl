@@ -117,3 +117,17 @@ struct PullRequestMetrics
     avg_merge_time_days::Union{Float64, Nothing} # Average for merged PRs in fetched data
     # Consider adding: distribution of merge times, avg time to first comment, etc.
 end
+
+"""
+    FetchedData
+
+(Internal helper struct) Container for raw fetched data.
+"""
+struct FetchedData
+    basic_info::Dict{String, RepoBasicInfo}
+    issues::Dict{String, Vector{GitHub.Issue}} # Specific type
+    contributors::Dict{String, Vector{ContributorMetrics}}
+    commits::Dict{String, Vector{CommitHistoryEntry}}
+    pull_requests::Dict{String, Vector{GitHub.PullRequest}} # Specific type
+    fetch_results::Dict{String, Any} # :success or error
+end

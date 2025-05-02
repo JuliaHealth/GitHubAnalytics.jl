@@ -1,5 +1,6 @@
 # src/fetching.jl
 using GitHub
+using HTTP
 using Dates
 using Logging
 
@@ -7,43 +8,48 @@ using Logging
 function fetch_paginated_data(func::Function, args...; auth, logger, params=Dict(), context="")
     all_results = []
     try
+        # Make initial request
         results, page_data = func(args...; auth=auth, params=merge(params, Dict("per_page" => 100)))
         append!(all_results, results)
         @debug "Fetched page 1 for $context" count=length(results)
 
-        # Loop through subsequent pages if they exist
+        # Loop through subsequent pages if they exist using the page_data dictionary
         page_count = 1
-        while GitHub.has_next_page(page_data)
+        while haskey(page_data, "next") && page_count < 50  # Limit to 50 pages as a safety
             page_count += 1
             @debug "Fetching page $page_count for $context"
-            # Slight delay between pages? Optional.
-            # sleep(0.1)
-            results, page_data = GitHub.pop_next_page(page_data) # Use pop_next_page
+            
+            # Use the next URL directly
+            results, page_data = GitHub.gh_get_paged_json(page_data["next"], auth=auth)
+            
             if !isnothing(results) && !isempty(results)
                  append!(all_results, results)
             else
                  @warn "Received empty results on page $page_count for $context, stopping pagination."
                  break # Stop if a page returns nothing or is empty
             end
-            # Add safeguard against infinite loops?
-            if page_count > 50 # Limit to 50 pages (5000 items) - adjust as needed
-                 @warn "Stopped pagination after 50 pages for $context to prevent potential infinite loop."
-                 break
-            end
+            
+            # Optional delay to avoid rate limiting
+            sleep(0.1)
         end
+        
+        if page_count >= 50
+            @warn "Stopped pagination after 50 pages for $context to prevent potential infinite loop."
+        end
+        
         @debug "Finished pagination for $context. Total items: $(length(all_results))"
         return all_results
     catch e
         # Handle common errors gracefully
-        if isa(e, GitHub.APIError) && e.response.status == 404
+        if isa(e, HTTP.StatusError) && e.status == 404
              @error "Resource not found (404) for $context: $(args[1])" repo=args[1] # Assume first arg is repo/org
-        elseif isa(e, GitHub.APIError) && e.response.status == 401
+        elseif isa(e, HTTP.StatusError) && e.status == 401
              @error "Authentication failed (401) for $context. Check token permissions." repo=args[1]
-        elseif isa(e, GitHub.APIError) && e.response.status == 403
+        elseif isa(e, HTTP.StatusError) && e.status == 403
              @error "Forbidden (403) for $context. Rate limit exceeded or insufficient permissions?" repo=args[1]
-        elseif isa(e, GitHub.APIError) && e.response.status == 409 # Conflict (e.g., empty repo for commits)
+        elseif isa(e, HTTP.StatusError) && e.status == 409 # Conflict (e.g., empty repo for commits)
              @warn "Conflict (409) fetching $context, likely an empty repository." repo=args[1]
-        elseif isa(e, GitHub.APIError) && e.response.status == 204 # No content (e.g., contributors)
+        elseif isa(e, HTTP.StatusError) && e.status == 204 # No content (e.g., contributors)
              @warn "No content (204) found for $context." repo=args[1]
         else
             # Log other errors more generally
@@ -67,6 +73,15 @@ function fetch_basic_repo_info(repo_name::String, auth::GitHub.Authorization, lo
         # Extract owner login and repo short name
         owner_login = repo_obj.owner.login
         repo_name_short = repo_obj.name
+        
+        # Safely check if 'archived' field exists, otherwise default to false
+        is_archived = false
+        try
+            is_archived = repo_obj.archived
+        catch
+            # Field doesn't exist, use default value
+            @debug "The 'archived' field doesn't exist in Repo object, using default false"
+        end
 
         basic_info = RepoBasicInfo(
             repo_name, # Use full name provided
@@ -79,14 +94,14 @@ function fetch_basic_repo_info(repo_name::String, auth::GitHub.Authorization, lo
             DateTime(repo_obj.created_at),
             DateTime(repo_obj.updated_at),
             repo_obj.fork,
-            repo_obj.archived
+            is_archived
         )
         return basic_info
     catch e
-        if isa(e, GitHub.APIError) && e.response.status == 404
+        if isa(e, HTTP.StatusError) && e.status == 404
             @error "Repository $repo_name not found (404)."
-        elseif isa(e, GitHub.APIError) # Catch other GitHub API errors
-             @error "GitHub API error fetching basic info for $repo_name" status=e.response.status exception=(e, catch_backtrace())
+        elseif isa(e, HTTP.StatusError) # Catch other GitHub API errors
+             @error "GitHub API error fetching basic info for $repo_name" status=e.status exception=(e, catch_backtrace())
         else
             @error "Error fetching basic info for $repo_name" exception=(e, catch_backtrace())
         end
@@ -117,7 +132,7 @@ Returns `nothing` on error, potentially an empty vector if no contributors (or 2
 """
 function fetch_contributors(repo_name::String, auth::GitHub.Authorization, logger::AbstractLogger)
     @debug "Fetching contributors for $repo_name"
-    # Note: GitHub.contributors returns Vector{Dict}
+    # Note: GitHub.contributors format has changed in v5.9
     raw_contributors = fetch_paginated_data(GitHub.contributors, repo_name;
                                            auth=auth, logger=logger,
                                            params=Dict(), # No extra params needed usually
@@ -127,19 +142,38 @@ function fetch_contributors(repo_name::String, auth::GitHub.Authorization, logge
         return nothing # Error occurred during fetch
     end
 
-    # Transform the Vector{Dict} into Vector{ContributorMetrics}
+    # Transform the contributor data into Vector{ContributorMetrics}
     contributor_metrics = ContributorMetrics[]
     try
-        for c_dict in raw_contributors
-             # Check for potential missing fields, although GitHub.jl usually handles this
-             login = get(get(c_dict, "contributor", Dict()), "login", nothing) # Safer access
-             contributions = get(c_dict, "contributions", nothing)
+        for contributor in raw_contributors
+            # GitHub.jl v5.9 returns contributor data in a Dict with "contributor" (Owner object) and "contributions" keys
+            login = nothing
+            contributions = nothing
+            
+            try
+                if contributor isa Dict && haskey(contributor, "contributor") && haskey(contributor, "contributions")
+                    # Extract the login from the Owner object
+                    owner_obj = contributor["contributor"]
+                    login = hasproperty(owner_obj, :login) ? owner_obj.login : nothing
+                    contributions = contributor["contributions"]
+                elseif contributor isa Dict
+                    # Fallback for other Dict formats
+                    login = get(get(contributor, "login", Dict()), "login", nothing)
+                    contributions = get(contributor, "contributions", nothing)
+                else
+                    # Structured data format
+                    login = contributor.login
+                    contributions = contributor.contributions
+                end
+            catch e
+                @debug "Contributor data format issue" contributor=contributor exception=e
+            end
 
-             if !isnothing(login) && !isnothing(contributions)
-                 push!(contributor_metrics, ContributorMetrics(repo_name, login, contributions))
-             else
-                 @warn "Skipping contributor entry with missing data" repo=repo_name entry=c_dict
-             end
+            if !isnothing(login) && !isnothing(contributions)
+                push!(contributor_metrics, ContributorMetrics(repo_name, login, contributions))
+            else
+                @warn "Skipping contributor entry with missing data" repo=repo_name entry=contributor
+            end
         end
     catch e
         @error "Error processing raw contributor data for $repo_name" exception=(e, catch_backtrace())
@@ -148,11 +182,10 @@ function fetch_contributors(repo_name::String, auth::GitHub.Authorization, logge
 
     if isempty(raw_contributors) && !isempty(contributor_metrics)
         # This case shouldn't happen logically, but good to check
-         @warn "Raw contributors empty but processed metrics not? Check logic." repo=repo_name
+        @warn "Raw contributors empty but processed metrics not? Check logic." repo=repo_name
     elseif isempty(raw_contributors) && isempty(contributor_metrics)
-         @debug "No contributors found or returned for $repo_name." # Could be 204 or genuinely empty
+        @debug "No contributors found or returned for $repo_name." # Could be 204 or genuinely empty
     end
-
 
     return contributor_metrics
 end

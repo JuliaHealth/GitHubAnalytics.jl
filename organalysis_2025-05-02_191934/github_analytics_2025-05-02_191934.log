@@ -1,0 +1,196 @@
+┌ Info: Starting GitHub Analytics run
+│   targets = ["JuliaAI"]
+│   output_dir = organalysis_2025-05-02_191934
+│   verbose = false
+└ @ GitHubAnalytics /Users/apple/Desktop/julia_stuff/GithubAnalytics.jl/src/GitHubAnalytics.jl:85
+┌ Info: GitHub authentication successful.
+└ @ GitHubAnalytics /Users/apple/Desktop/julia_stuff/GithubAnalytics.jl/src/GitHubAnalytics.jl:95
+┌ Info: Identifying target repositories...
+└ @ GitHubAnalytics /Users/apple/Desktop/julia_stuff/GithubAnalytics.jl/src/GitHubAnalytics.jl:154
+┌ Info: Fetching repositories for organization: JuliaAI
+└ @ GitHubAnalytics /Users/apple/Desktop/julia_stuff/GithubAnalytics.jl/src/GitHubAnalytics.jl:160
+┌ Info: Found 52 public repositories for JuliaAI.
+└ @ GitHubAnalytics /Users/apple/Desktop/julia_stuff/GithubAnalytics.jl/src/GitHubAnalytics.jl:169
+┌ Info: Identified 52 unique repositories.
+│   unique_targets = 1
+└ @ GitHubAnalytics /Users/apple/Desktop/julia_stuff/GithubAnalytics.jl/src/GitHubAnalytics.jl:175
+┌ Info: Fetching data for 52 repositories...
+└ @ GitHubAnalytics /Users/apple/Desktop/julia_stuff/GithubAnalytics.jl/src/GitHubAnalytics.jl:194
+┌ Info: Fetching data for repo 1/52: JuliaAI/.github
+└ @ GitHubAnalytics /Users/apple/Desktop/julia_stuff/GithubAnalytics.jl/src/GitHubAnalytics.jl:198
+┌ Info: Fetching data for repo 2/52: JuliaAI/CatBoost.jl
+└ @ GitHubAnalytics /Users/apple/Desktop/julia_stuff/GithubAnalytics.jl/src/GitHubAnalytics.jl:198
+┌ Info: Fetching data for repo 3/52: JuliaAI/CategoricalDistributions.jl
+└ @ GitHubAnalytics /Users/apple/Desktop/julia_stuff/GithubAnalytics.jl/src/GitHubAnalytics.jl:198
+┌ Info: Fetching data for repo 4/52: JuliaAI/DataScienceTutorials.jl
+└ @ GitHubAnalytics /Users/apple/Desktop/julia_stuff/GithubAnalytics.jl/src/GitHubAnalytics.jl:198
+┌ Info: Fetching data for repo 5/52: JuliaAI/DecisionTree.jl
+└ @ GitHubAnalytics /Users/apple/Desktop/julia_stuff/GithubAnalytics.jl/src/GitHubAnalytics.jl:198
+┌ Info: Fetching data for repo 6/52: JuliaAI/EarlyStopping.jl
+└ @ GitHubAnalytics /Users/apple/Desktop/julia_stuff/GithubAnalytics.jl/src/GitHubAnalytics.jl:198
+┌ Info: Fetching data for repo 7/52: JuliaAI/FeatureSelection.jl
+└ @ GitHubAnalytics /Users/apple/Desktop/julia_stuff/GithubAnalytics.jl/src/GitHubAnalytics.jl:198
+┌ Info: Fetching data for repo 8/52: JuliaAI/HelloJulia.jl
+└ @ GitHubAnalytics /Users/apple/Desktop/julia_stuff/GithubAnalytics.jl/src/GitHubAnalytics.jl:198
+┌ Info: Fetching data for repo 9/52: JuliaAI/Imbalance.jl
+└ @ GitHubAnalytics /Users/apple/Desktop/julia_stuff/GithubAnalytics.jl/src/GitHubAnalytics.jl:198
+┌ Info: Fetching data for repo 10/52: JuliaAI/IterationControl.jl
+└ @ GitHubAnalytics /Users/apple/Desktop/julia_stuff/GithubAnalytics.jl/src/GitHubAnalytics.jl:198
+┌ Info: Fetching data for repo 11/52: JuliaAI/LearnAPI.jl
+└ @ GitHubAnalytics /Users/apple/Desktop/julia_stuff/GithubAnalytics.jl/src/GitHubAnalytics.jl:198
+┌ Info: Fetching data for repo 12/52: JuliaAI/LearnDataFrontEnds.jl
+└ @ GitHubAnalytics /Users/apple/Desktop/julia_stuff/GithubAnalytics.jl/src/GitHubAnalytics.jl:198
+┌ Info: Fetching data for repo 13/52: JuliaAI/LearnTestAPI.jl
+└ @ GitHubAnalytics /Users/apple/Desktop/julia_stuff/GithubAnalytics.jl/src/GitHubAnalytics.jl:198
+┌ Info: Fetching data for repo 14/52: JuliaAI/MLFlowClient.jl
+└ @ GitHubAnalytics /Users/apple/Desktop/julia_stuff/GithubAnalytics.jl/src/GitHubAnalytics.jl:198
+┌ Info: Fetching data for repo 15/52: JuliaAI/MLJ
+└ @ GitHubAnalytics /Users/apple/Desktop/julia_stuff/GithubAnalytics.jl/src/GitHubAnalytics.jl:198
+┌ Info: Fetching data for repo 16/52: JuliaAI/MLJ.jl
+└ @ GitHubAnalytics /Users/apple/Desktop/julia_stuff/GithubAnalytics.jl/src/GitHubAnalytics.jl:198
+┌ Info: Fetching data for repo 17/52: JuliaAI/MLJBalancing.jl
+└ @ GitHubAnalytics /Users/apple/Desktop/julia_stuff/GithubAnalytics.jl/src/GitHubAnalytics.jl:198
+┌ Info: Fetching data for repo 18/52: JuliaAI/MLJBase.jl
+└ @ GitHubAnalytics /Users/apple/Desktop/julia_stuff/GithubAnalytics.jl/src/GitHubAnalytics.jl:198
+┌ Info: Fetching data for repo 19/52: JuliaAI/MLJClusteringInterface.jl
+└ @ GitHubAnalytics /Users/apple/Desktop/julia_stuff/GithubAnalytics.jl/src/GitHubAnalytics.jl:198
+┌ Info: Fetching data for repo 20/52: JuliaAI/MLJDecisionTreeInterface.jl
+└ @ GitHubAnalytics /Users/apple/Desktop/julia_stuff/GithubAnalytics.jl/src/GitHubAnalytics.jl:198
+┌ Info: Fetching data for repo 21/52: JuliaAI/MLJEnsembles.jl
+└ @ GitHubAnalytics /Users/apple/Desktop/julia_stuff/GithubAnalytics.jl/src/GitHubAnalytics.jl:198
+┌ Info: Fetching data for repo 22/52: JuliaAI/MLJExampleInterface.jl
+└ @ GitHubAnalytics /Users/apple/Desktop/julia_stuff/GithubAnalytics.jl/src/GitHubAnalytics.jl:198
+┌ Info: Fetching data for repo 23/52: JuliaAI/MLJFlow.jl
+└ @ GitHubAnalytics /Users/apple/Desktop/julia_stuff/GithubAnalytics.jl/src/GitHubAnalytics.jl:198
+┌ Info: Fetching data for repo 24/52: JuliaAI/MLJGaussianProcessesInterface.jl
+└ @ GitHubAnalytics /Users/apple/Desktop/julia_stuff/GithubAnalytics.jl/src/GitHubAnalytics.jl:198
+┌ Info: Fetching data for repo 25/52: JuliaAI/MLJGLMInterface.jl
+└ @ GitHubAnalytics /Users/apple/Desktop/julia_stuff/GithubAnalytics.jl/src/GitHubAnalytics.jl:198
+┌ Info: Fetching data for repo 26/52: JuliaAI/MLJIteration.jl
+└ @ GitHubAnalytics /Users/apple/Desktop/julia_stuff/GithubAnalytics.jl/src/GitHubAnalytics.jl:198
+┌ Info: Fetching data for repo 27/52: JuliaAI/MLJLIBSVMInterface.jl
+└ @ GitHubAnalytics /Users/apple/Desktop/julia_stuff/GithubAnalytics.jl/src/GitHubAnalytics.jl:198
+┌ Info: Fetching data for repo 28/52: JuliaAI/MLJLinearModels.jl
+└ @ GitHubAnalytics /Users/apple/Desktop/julia_stuff/GithubAnalytics.jl/src/GitHubAnalytics.jl:198
+┌ Info: Fetching data for repo 29/52: JuliaAI/MLJModelInterface.jl
+└ @ GitHubAnalytics /Users/apple/Desktop/julia_stuff/GithubAnalytics.jl/src/GitHubAnalytics.jl:198
+┌ Info: Fetching data for repo 30/52: JuliaAI/MLJModels.jl
+└ @ GitHubAnalytics /Users/apple/Desktop/julia_stuff/GithubAnalytics.jl/src/GitHubAnalytics.jl:198
+┌ Info: Fetching data for repo 31/52: JuliaAI/MLJMultivariateStatsInterface.jl
+└ @ GitHubAnalytics /Users/apple/Desktop/julia_stuff/GithubAnalytics.jl/src/GitHubAnalytics.jl:198
+┌ Info: Fetching data for repo 32/52: JuliaAI/MLJNaiveBayesInterface.jl
+└ @ GitHubAnalytics /Users/apple/Desktop/julia_stuff/GithubAnalytics.jl/src/GitHubAnalytics.jl:198
+┌ Info: Fetching data for repo 33/52: JuliaAI/MLJOpenML.jl
+└ @ GitHubAnalytics /Users/apple/Desktop/julia_stuff/GithubAnalytics.jl/src/GitHubAnalytics.jl:198
+┌ Info: Fetching data for repo 34/52: JuliaAI/MLJParticleSwarmOptimization.jl
+└ @ GitHubAnalytics /Users/apple/Desktop/julia_stuff/GithubAnalytics.jl/src/GitHubAnalytics.jl:198
+┌ Info: Fetching data for repo 35/52: JuliaAI/MLJScientificTypes.jl
+└ @ GitHubAnalytics /Users/apple/Desktop/julia_stuff/GithubAnalytics.jl/src/GitHubAnalytics.jl:198
+┌ Info: Fetching data for repo 36/52: JuliaAI/MLJScikitLearnInterface.jl
+└ @ GitHubAnalytics /Users/apple/Desktop/julia_stuff/GithubAnalytics.jl/src/GitHubAnalytics.jl:198
+┌ Info: Fetching data for repo 37/52: JuliaAI/MLJSerialization.jl
+└ @ GitHubAnalytics /Users/apple/Desktop/julia_stuff/GithubAnalytics.jl/src/GitHubAnalytics.jl:198
+┌ Info: Fetching data for repo 38/52: JuliaAI/MLJTestIntegration.jl
+└ @ GitHubAnalytics /Users/apple/Desktop/julia_stuff/GithubAnalytics.jl/src/GitHubAnalytics.jl:198
+┌ Info: Fetching data for repo 39/52: JuliaAI/MLJTestInterface.jl
+└ @ GitHubAnalytics /Users/apple/Desktop/julia_stuff/GithubAnalytics.jl/src/GitHubAnalytics.jl:198
+┌ Info: Fetching data for repo 40/52: JuliaAI/MLJText.jl
+└ @ GitHubAnalytics /Users/apple/Desktop/julia_stuff/GithubAnalytics.jl/src/GitHubAnalytics.jl:198
+┌ Info: Fetching data for repo 41/52: JuliaAI/MLJTime
+└ @ GitHubAnalytics /Users/apple/Desktop/julia_stuff/GithubAnalytics.jl/src/GitHubAnalytics.jl:198
+┌ Info: Fetching data for repo 42/52: JuliaAI/MLJTSVDInterface.jl
+└ @ GitHubAnalytics /Users/apple/Desktop/julia_stuff/GithubAnalytics.jl/src/GitHubAnalytics.jl:198
+┌ Info: Fetching data for repo 43/52: JuliaAI/MLJTuning.jl
+└ @ GitHubAnalytics /Users/apple/Desktop/julia_stuff/GithubAnalytics.jl/src/GitHubAnalytics.jl:198
+┌ Info: Fetching data for repo 44/52: JuliaAI/MLJXGBoostInterface.jl
+└ @ GitHubAnalytics /Users/apple/Desktop/julia_stuff/GithubAnalytics.jl/src/GitHubAnalytics.jl:198
+┌ Info: Fetching data for repo 45/52: JuliaAI/NearestNeighborModels.jl
+└ @ GitHubAnalytics /Users/apple/Desktop/julia_stuff/GithubAnalytics.jl/src/GitHubAnalytics.jl:198
+┌ Info: Fetching data for repo 46/52: JuliaAI/OpenML.jl
+└ @ GitHubAnalytics /Users/apple/Desktop/julia_stuff/GithubAnalytics.jl/src/GitHubAnalytics.jl:198
+┌ Info: Fetching data for repo 47/52: JuliaAI/ScientificTypes.jl
+└ @ GitHubAnalytics /Users/apple/Desktop/julia_stuff/GithubAnalytics.jl/src/GitHubAnalytics.jl:198
+┌ Info: Fetching data for repo 48/52: JuliaAI/ScientificTypesBase.jl
+└ @ GitHubAnalytics /Users/apple/Desktop/julia_stuff/GithubAnalytics.jl/src/GitHubAnalytics.jl:198
+┌ Info: Fetching data for repo 49/52: JuliaAI/StatisticalMeasures.jl
+└ @ GitHubAnalytics /Users/apple/Desktop/julia_stuff/GithubAnalytics.jl/src/GitHubAnalytics.jl:198
+┌ Info: Fetching data for repo 50/52: JuliaAI/StatisticalMeasuresBase.jl
+└ @ GitHubAnalytics /Users/apple/Desktop/julia_stuff/GithubAnalytics.jl/src/GitHubAnalytics.jl:198
+┌ Info: Fetching data for repo 51/52: JuliaAI/StatisticalTraits.jl
+└ @ GitHubAnalytics /Users/apple/Desktop/julia_stuff/GithubAnalytics.jl/src/GitHubAnalytics.jl:198
+┌ Info: Fetching data for repo 52/52: JuliaAI/TreeRecipe.jl
+└ @ GitHubAnalytics /Users/apple/Desktop/julia_stuff/GithubAnalytics.jl/src/GitHubAnalytics.jl:198
+┌ Info: Finished fetching data.
+│   successful_repos = 52
+│   failed_or_skipped_repos = 0
+│   total_identified = 52
+│   duration_minutes = 3.8
+└ @ GitHubAnalytics /Users/apple/Desktop/julia_stuff/GithubAnalytics.jl/src/GitHubAnalytics.jl:228
+┌ Info: Processing fetched data for 52 repositories...
+└ @ GitHubAnalytics /Users/apple/Desktop/julia_stuff/GithubAnalytics.jl/src/GitHubAnalytics.jl:111
+┌ Info: Starting data processing...
+└ @ GitHubAnalytics /Users/apple/Desktop/julia_stuff/GithubAnalytics.jl/src/processing.jl:58
+┌ Info: Aggregated commit counts for 148 unique contributors.
+└ @ GitHubAnalytics /Users/apple/Desktop/julia_stuff/GithubAnalytics.jl/src/processing.jl:201
+┌ Info: Aggregated daily commit counts for 179 days.
+└ @ GitHubAnalytics /Users/apple/Desktop/julia_stuff/GithubAnalytics.jl/src/processing.jl:233
+┌ Info: Aggregated language distribution for 4 languages.
+└ @ GitHubAnalytics /Users/apple/Desktop/julia_stuff/GithubAnalytics.jl/src/processing.jl:250
+┌ Info: Calculated overall statistics.
+└ @ GitHubAnalytics /Users/apple/Desktop/julia_stuff/GithubAnalytics.jl/src/processing.jl:284
+┌ Info: Data processing complete.
+└ @ GitHubAnalytics /Users/apple/Desktop/julia_stuff/GithubAnalytics.jl/src/processing.jl:300
+┌ Info: Finished processing data in 0.7s.
+└ @ GitHubAnalytics /Users/apple/Desktop/julia_stuff/GithubAnalytics.jl/src/GitHubAnalytics.jl:115
+┌ Info: Generating outputs...
+└ @ GitHubAnalytics /Users/apple/Desktop/julia_stuff/GithubAnalytics.jl/src/GitHubAnalytics.jl:122
+┌ Info: Generating CSV reports...
+└ @ GitHubAnalytics /Users/apple/Desktop/julia_stuff/GithubAnalytics.jl/src/reporting.jl:16
+┌ Info: Repository metrics saved to organalysis_2025-05-02_191934/repository_metrics_2025-05-02_192332.csv
+└ @ GitHubAnalytics /Users/apple/Desktop/julia_stuff/GithubAnalytics.jl/src/reporting.jl:51
+┌ Info: Contributor summary saved to organalysis_2025-05-02_191934/contributor_summary_2025-05-02_192332.csv
+└ @ GitHubAnalytics /Users/apple/Desktop/julia_stuff/GithubAnalytics.jl/src/reporting.jl:58
+┌ Info: Overall commit activity saved to organalysis_2025-05-02_191934/overall_commit_activity_2025-05-02_192332.csv
+└ @ GitHubAnalytics /Users/apple/Desktop/julia_stuff/GithubAnalytics.jl/src/reporting.jl:66
+┌ Info: Language distribution saved to organalysis_2025-05-02_191934/language_distribution_2025-05-02_192332.csv
+└ @ GitHubAnalytics /Users/apple/Desktop/julia_stuff/GithubAnalytics.jl/src/reporting.jl:74
+┌ Info: CSV report generation finished.
+└ @ GitHubAnalytics /Users/apple/Desktop/julia_stuff/GithubAnalytics.jl/src/reporting.jl:78
+┌ Info: Generating Markdown summary...
+└ @ GitHubAnalytics /Users/apple/Desktop/julia_stuff/GithubAnalytics.jl/src/reporting.jl:91
+┌ Info: Markdown summary saved to organalysis_2025-05-02_191934/summary_2025-05-02_192334.md
+└ @ GitHubAnalytics /Users/apple/Desktop/julia_stuff/GithubAnalytics.jl/src/reporting.jl:215
+┌ Info: Generating visualizations...
+└ @ GitHubAnalytics /Users/apple/Desktop/julia_stuff/GithubAnalytics.jl/src/plotting.jl:403
+┌ Info: Plot saved successfully: organalysis_2025-05-02_191934/top_repos_by_stars.png
+└ @ GitHubAnalytics /Users/apple/Desktop/julia_stuff/GithubAnalytics.jl/src/plotting.jl:47
+┌ Info: Plot saved successfully: organalysis_2025-05-02_191934/top_repos_by_monthly_commits.png
+└ @ GitHubAnalytics /Users/apple/Desktop/julia_stuff/GithubAnalytics.jl/src/plotting.jl:47
+┌ Info: Plot saved successfully: organalysis_2025-05-02_191934/issue_status_top_repos.png
+└ @ GitHubAnalytics /Users/apple/Desktop/julia_stuff/GithubAnalytics.jl/src/plotting.jl:47
+┌ Info: Commit activity data shape: (179, 2). First row: DataFrameRow
+│  Row │ date        commit_count
+│      │ Date        Int64
+│ ─────┼──────────────────────────
+│    1 │ 2024-05-03             5
+└ @ GitHubAnalytics /Users/apple/Desktop/julia_stuff/GithubAnalytics.jl/src/plotting.jl:124
+┌ Info: Found 1184 commits across 179 days
+└ @ GitHubAnalytics /Users/apple/Desktop/julia_stuff/GithubAnalytics.jl/src/plotting.jl:163
+┌ Info: Plot saved successfully: organalysis_2025-05-02_191934/overall_commit_activity.png
+└ @ GitHubAnalytics /Users/apple/Desktop/julia_stuff/GithubAnalytics.jl/src/plotting.jl:47
+┌ Info: Successfully created commit activity plot
+└ @ GitHubAnalytics /Users/apple/Desktop/julia_stuff/GithubAnalytics.jl/src/plotting.jl:195
+┌ Info: Plot saved successfully: organalysis_2025-05-02_191934/top_contributors.png
+└ @ GitHubAnalytics /Users/apple/Desktop/julia_stuff/GithubAnalytics.jl/src/plotting.jl:47
+┌ Info: Plot saved successfully: organalysis_2025-05-02_191934/overall_issue_distribution_pie.png
+└ @ GitHubAnalytics /Users/apple/Desktop/julia_stuff/GithubAnalytics.jl/src/plotting.jl:47
+┌ Info: Plot saved successfully: organalysis_2025-05-02_191934/pull_request_summary.png
+└ @ GitHubAnalytics /Users/apple/Desktop/julia_stuff/GithubAnalytics.jl/src/plotting.jl:47
+┌ Info: Plot saved successfully: organalysis_2025-05-02_191934/language_distribution_pie.png
+└ @ GitHubAnalytics /Users/apple/Desktop/julia_stuff/GithubAnalytics.jl/src/plotting.jl:47
+┌ Info: Visualizations generation attempted. Check logs for success/failure of individual plots.
+└ @ GitHubAnalytics /Users/apple/Desktop/julia_stuff/GithubAnalytics.jl/src/plotting.jl:429
+┌ Info: Finished generating outputs in 16.1s.
+└ @ GitHubAnalytics /Users/apple/Desktop/julia_stuff/GithubAnalytics.jl/src/GitHubAnalytics.jl:128
+┌ Info: GitHub Analytics run complete. Results for 52 repositories saved in: organalysis_2025-05-02_191934
+└ @ GitHubAnalytics /Users/apple/Desktop/julia_stuff/GithubAnalytics.jl/src/GitHubAnalytics.jl:131
