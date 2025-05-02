@@ -1,0 +1,273 @@
+┌ Info: Starting GitHub Analytics run
+│   targets = ["sylvaticus"]
+│   output_dir = organalysis_2025-05-02_200803
+│   verbose = false
+└ @ GitHubAnalytics /Users/apple/Desktop/julia_stuff/GithubAnalytics.jl/src/GitHubAnalytics.jl:85
+┌ Info: GitHub authentication successful.
+└ @ GitHubAnalytics /Users/apple/Desktop/julia_stuff/GithubAnalytics.jl/src/GitHubAnalytics.jl:95
+┌ Info: Identifying target repositories...
+└ @ GitHubAnalytics /Users/apple/Desktop/julia_stuff/GithubAnalytics.jl/src/GitHubAnalytics.jl:154
+┌ Info: Fetching repositories for organization: sylvaticus
+└ @ GitHubAnalytics /Users/apple/Desktop/julia_stuff/GithubAnalytics.jl/src/GitHubAnalytics.jl:160
+┌ Info: Found 71 public repositories for sylvaticus.
+└ @ GitHubAnalytics /Users/apple/Desktop/julia_stuff/GithubAnalytics.jl/src/GitHubAnalytics.jl:169
+┌ Info: Identified 71 unique repositories.
+│   unique_targets = 1
+└ @ GitHubAnalytics /Users/apple/Desktop/julia_stuff/GithubAnalytics.jl/src/GitHubAnalytics.jl:175
+┌ Info: Fetching data for 71 repositories...
+└ @ GitHubAnalytics /Users/apple/Desktop/julia_stuff/GithubAnalytics.jl/src/GitHubAnalytics.jl:194
+┌ Info: Fetching data for repo 1/71: sylvaticus/14_310x_ClassNotes
+└ @ GitHubAnalytics /Users/apple/Desktop/julia_stuff/GithubAnalytics.jl/src/GitHubAnalytics.jl:198
+┌ Info: Fetching data for repo 2/71: sylvaticus/186501xStatistics
+└ @ GitHubAnalytics /Users/apple/Desktop/julia_stuff/GithubAnalytics.jl/src/GitHubAnalytics.jl:198
+┌ Info: Fetching data for repo 3/71: sylvaticus/awesome-machine-learning
+└ @ GitHubAnalytics /Users/apple/Desktop/julia_stuff/GithubAnalytics.jl/src/GitHubAnalytics.jl:198
+┌ Info: Fetching data for repo 4/71: sylvaticus/BDisposal.jl
+└ @ GitHubAnalytics /Users/apple/Desktop/julia_stuff/GithubAnalytics.jl/src/GitHubAnalytics.jl:198
+┌ Info: Fetching data for repo 5/71: sylvaticus/BetaML.jl
+└ @ GitHubAnalytics /Users/apple/Desktop/julia_stuff/GithubAnalytics.jl/src/GitHubAnalytics.jl:198
+┌ Info: Fetching data for repo 6/71: sylvaticus/BetaMLRequirements
+└ @ GitHubAnalytics /Users/apple/Desktop/julia_stuff/GithubAnalytics.jl/src/GitHubAnalytics.jl:198
+┌ Info: Fetching data for repo 7/71: sylvaticus/cartography
+└ @ GitHubAnalytics /Users/apple/Desktop/julia_stuff/GithubAnalytics.jl/src/GitHubAnalytics.jl:198
+┌ Info: Fetching data for repo 8/71: sylvaticus/chelsa_cmip6
+└ @ GitHubAnalytics /Users/apple/Desktop/julia_stuff/GithubAnalytics.jl/src/GitHubAnalytics.jl:198
+┌ Info: Fetching data for repo 9/71: sylvaticus/climatedice
+└ @ GitHubAnalytics /Users/apple/Desktop/julia_stuff/GithubAnalytics.jl/src/GitHubAnalytics.jl:198
+┌ Info: Fetching data for repo 10/71: sylvaticus/commonDistributionsInJuliaPythonR
+└ @ GitHubAnalytics /Users/apple/Desktop/julia_stuff/GithubAnalytics.jl/src/GitHubAnalytics.jl:198
+┌ Info: Fetching data for repo 11/71: sylvaticus/CSV.jl
+└ @ GitHubAnalytics /Users/apple/Desktop/julia_stuff/GithubAnalytics.jl/src/GitHubAnalytics.jl:198
+┌ Info: Fetching data for repo 12/71: sylvaticus/data-analysis-for-social-scientists-mitx
+└ @ GitHubAnalytics /Users/apple/Desktop/julia_stuff/GithubAnalytics.jl/src/GitHubAnalytics.jl:198
+┌ Info: Fetching data for repo 13/71: sylvaticus/DataFrames.jl
+└ @ GitHubAnalytics /Users/apple/Desktop/julia_stuff/GithubAnalytics.jl/src/GitHubAnalytics.jl:198
+┌ Info: Fetching data for repo 14/71: sylvaticus/DataFramesMeta.jl
+└ @ GitHubAnalytics /Users/apple/Desktop/julia_stuff/GithubAnalytics.jl/src/GitHubAnalytics.jl:198
+┌ Info: Fetching data for repo 15/71: sylvaticus/Debugger.jl
+└ @ GitHubAnalytics /Users/apple/Desktop/julia_stuff/GithubAnalytics.jl/src/GitHubAnalytics.jl:198
+┌ Info: Fetching data for repo 16/71: sylvaticus/DICE.jl
+└ @ GitHubAnalytics /Users/apple/Desktop/julia_stuff/GithubAnalytics.jl/src/GitHubAnalytics.jl:198
+┌ Info: Fetching data for repo 17/71: sylvaticus/DICEModel.jl
+└ @ GitHubAnalytics /Users/apple/Desktop/julia_stuff/GithubAnalytics.jl/src/GitHubAnalytics.jl:198
+┌ Info: Fetching data for repo 18/71: sylvaticus/DocumentationGeneratorRegistry
+└ @ GitHubAnalytics /Users/apple/Desktop/julia_stuff/GithubAnalytics.jl/src/GitHubAnalytics.jl:198
+┌ Info: Fetching data for repo 19/71: sylvaticus/Documenter.jl
+└ @ GitHubAnalytics /Users/apple/Desktop/julia_stuff/GithubAnalytics.jl/src/GitHubAnalytics.jl:198
+┌ Info: Fetching data for repo 20/71: sylvaticus/free-programming-books
+└ @ GitHubAnalytics /Users/apple/Desktop/julia_stuff/GithubAnalytics.jl/src/GitHubAnalytics.jl:198
+┌ Info: Fetching data for repo 21/71: sylvaticus/GameTheoryNotes
+└ @ GitHubAnalytics /Users/apple/Desktop/julia_stuff/GithubAnalytics.jl/src/GitHubAnalytics.jl:198
+┌ Info: Fetching data for repo 22/71: sylvaticus/github-for-developers-7
+└ @ GitHubAnalytics /Users/apple/Desktop/julia_stuff/GithubAnalytics.jl/src/GitHubAnalytics.jl:198
+┌ Info: Fetching data for repo 23/71: sylvaticus/Imbalance.jl
+└ @ GitHubAnalytics /Users/apple/Desktop/julia_stuff/GithubAnalytics.jl/src/GitHubAnalytics.jl:198
+┌ Info: Fetching data for repo 24/71: sylvaticus/Interfaces.jl
+└ @ GitHubAnalytics /Users/apple/Desktop/julia_stuff/GithubAnalytics.jl/src/GitHubAnalytics.jl:198
+┌ Info: Fetching data for repo 25/71: sylvaticus/IntroductionToProbability
+└ @ GitHubAnalytics /Users/apple/Desktop/julia_stuff/GithubAnalytics.jl/src/GitHubAnalytics.jl:198
+┌ Info: Fetching data for repo 26/71: sylvaticus/JavaCall.jl
+└ @ GitHubAnalytics /Users/apple/Desktop/julia_stuff/GithubAnalytics.jl/src/GitHubAnalytics.jl:198
+┌ Info: Fetching data for repo 27/71: sylvaticus/julia
+└ @ GitHubAnalytics /Users/apple/Desktop/julia_stuff/GithubAnalytics.jl/src/GitHubAnalytics.jl:198
+┌ Info: Fetching data for repo 28/71: sylvaticus/Julia.jl
+└ @ GitHubAnalytics /Users/apple/Desktop/julia_stuff/GithubAnalytics.jl/src/GitHubAnalytics.jl:198
+┌ Info: Fetching data for repo 29/71: sylvaticus/JuliaComputation
+└ @ GitHubAnalytics /Users/apple/Desktop/julia_stuff/GithubAnalytics.jl/src/GitHubAnalytics.jl:198
+┌ Info: Fetching data for repo 30/71: sylvaticus/JuliaMLCourse
+└ @ GitHubAnalytics /Users/apple/Desktop/julia_stuff/GithubAnalytics.jl/src/GitHubAnalytics.jl:198
+┌ Info: Fetching data for repo 31/71: sylvaticus/juliatutorial
+└ @ GitHubAnalytics /Users/apple/Desktop/julia_stuff/GithubAnalytics.jl/src/GitHubAnalytics.jl:198
+┌ Info: Fetching data for repo 32/71: sylvaticus/LAJuliaUtils.jl
+└ @ GitHubAnalytics /Users/apple/Desktop/julia_stuff/GithubAnalytics.jl/src/GitHubAnalytics.jl:198
+┌ Info: Fetching data for repo 33/71: sylvaticus/landUsePartitionByRegionAndYear
+└ @ GitHubAnalytics /Users/apple/Desktop/julia_stuff/GithubAnalytics.jl/src/GitHubAnalytics.jl:198
+┌ Info: Fetching data for repo 34/71: sylvaticus/latexcode
+└ @ GitHubAnalytics /Users/apple/Desktop/julia_stuff/GithubAnalytics.jl/src/GitHubAnalytics.jl:198
+┌ Info: Fetching data for repo 35/71: sylvaticus/Machine-Learning
+└ @ GitHubAnalytics /Users/apple/Desktop/julia_stuff/GithubAnalytics.jl/src/GitHubAnalytics.jl:198
+┌ Info: Fetching data for repo 36/71: sylvaticus/Markets.jl
+└ @ GitHubAnalytics /Users/apple/Desktop/julia_stuff/GithubAnalytics.jl/src/GitHubAnalytics.jl:198
+┌ Info: Fetching data for repo 37/71: sylvaticus/METADATA.jl
+└ @ GitHubAnalytics /Users/apple/Desktop/julia_stuff/GithubAnalytics.jl/src/GitHubAnalytics.jl:198
+┌ Info: Fetching data for repo 38/71: sylvaticus/Missings.jl
+└ @ GitHubAnalytics /Users/apple/Desktop/julia_stuff/GithubAnalytics.jl/src/GitHubAnalytics.jl:198
+┌ Info: Fetching data for repo 39/71: sylvaticus/MITx-MicroMaster-Statistics-and-Data-Science
+└ @ GitHubAnalytics /Users/apple/Desktop/julia_stuff/GithubAnalytics.jl/src/GitHubAnalytics.jl:198
+┌ Info: Fetching data for repo 40/71: sylvaticus/MITx_-_6.041x_Introduction_to_Probability
+└ @ GitHubAnalytics /Users/apple/Desktop/julia_stuff/GithubAnalytics.jl/src/GitHubAnalytics.jl:198
+┌ Info: Fetching data for repo 41/71: sylvaticus/MITx_18.6501x_fundamental_of_statistics
+└ @ GitHubAnalytics /Users/apple/Desktop/julia_stuff/GithubAnalytics.jl/src/GitHubAnalytics.jl:198
+┌ Info: Fetching data for repo 42/71: sylvaticus/MITx_6.86x
+└ @ GitHubAnalytics /Users/apple/Desktop/julia_stuff/GithubAnalytics.jl/src/GitHubAnalytics.jl:198
+┌ Info: Fetching data for repo 43/71: sylvaticus/ml-tutorial
+└ @ GitHubAnalytics /Users/apple/Desktop/julia_stuff/GithubAnalytics.jl/src/GitHubAnalytics.jl:198
+┌ Info: Fetching data for repo 44/71: sylvaticus/MLDatasets.jl
+└ @ GitHubAnalytics /Users/apple/Desktop/julia_stuff/GithubAnalytics.jl/src/GitHubAnalytics.jl:198
+┌ Info: Fetching data for repo 45/71: sylvaticus/MLJ.jl
+└ @ GitHubAnalytics /Users/apple/Desktop/julia_stuff/GithubAnalytics.jl/src/GitHubAnalytics.jl:198
+┌ Info: Fetching data for repo 46/71: sylvaticus/MultiDimEquations.jl
+└ @ GitHubAnalytics /Users/apple/Desktop/julia_stuff/GithubAnalytics.jl/src/GitHubAnalytics.jl:198
+┌ Info: Fetching data for repo 47/71: sylvaticus/MyAwesomePackage.jl
+└ @ GitHubAnalytics /Users/apple/Desktop/julia_stuff/GithubAnalytics.jl/src/GitHubAnalytics.jl:198
+┌ Info: Fetching data for repo 48/71: sylvaticus/OdsIO.jl
+└ @ GitHubAnalytics /Users/apple/Desktop/julia_stuff/GithubAnalytics.jl/src/GitHubAnalytics.jl:198
+┌ Info: Fetching data for repo 49/71: sylvaticus/PackageEvaluator.jl
+└ @ GitHubAnalytics /Users/apple/Desktop/julia_stuff/GithubAnalytics.jl/src/GitHubAnalytics.jl:198
+┌ Info: Fetching data for repo 50/71: sylvaticus/POMDPExamples.jl
+└ @ GitHubAnalytics /Users/apple/Desktop/julia_stuff/GithubAnalytics.jl/src/GitHubAnalytics.jl:198
+┌ Info: Fetching data for repo 51/71: sylvaticus/probability_cheatsheet
+└ @ GitHubAnalytics /Users/apple/Desktop/julia_stuff/GithubAnalytics.jl/src/GitHubAnalytics.jl:198
+┌ Info: Fetching data for repo 52/71: sylvaticus/PyomoGallery
+└ @ GitHubAnalytics /Users/apple/Desktop/julia_stuff/GithubAnalytics.jl/src/GitHubAnalytics.jl:198
+┌ Info: Fetching data for repo 53/71: sylvaticus/QuizQuestions.jl
+└ @ GitHubAnalytics /Users/apple/Desktop/julia_stuff/GithubAnalytics.jl/src/GitHubAnalytics.jl:198
+┌ Info: Fetching data for repo 54/71: sylvaticus/RasterDataSources.jl
+└ @ GitHubAnalytics /Users/apple/Desktop/julia_stuff/GithubAnalytics.jl/src/GitHubAnalytics.jl:198
+┌ Info: Fetching data for repo 55/71: sylvaticus/ShapML.jl
+└ @ GitHubAnalytics /Users/apple/Desktop/julia_stuff/GithubAnalytics.jl/src/GitHubAnalytics.jl:198
+┌ Info: Fetching data for repo 56/71: sylvaticus/Signal-Android
+└ @ GitHubAnalytics /Users/apple/Desktop/julia_stuff/GithubAnalytics.jl/src/GitHubAnalytics.jl:198
+┌ Info: Fetching data for repo 57/71: sylvaticus/SimpleGames.jl
+└ @ GitHubAnalytics /Users/apple/Desktop/julia_stuff/GithubAnalytics.jl/src/GitHubAnalytics.jl:198
+┌ Info: Fetching data for repo 58/71: sylvaticus/SPMLJ
+└ @ GitHubAnalytics /Users/apple/Desktop/julia_stuff/GithubAnalytics.jl/src/GitHubAnalytics.jl:198
+┌ Info: Fetching data for repo 59/71: sylvaticus/StatPlots.jl
+└ @ GitHubAnalytics /Users/apple/Desktop/julia_stuff/GithubAnalytics.jl/src/GitHubAnalytics.jl:198
+┌ Info: Fetching data for repo 60/71: sylvaticus/StochasticCashFlow.jl
+└ @ GitHubAnalytics /Users/apple/Desktop/julia_stuff/GithubAnalytics.jl/src/GitHubAnalytics.jl:198
+┌ Info: Fetching data for repo 61/71: sylvaticus/StrategicGames.jl
+└ @ GitHubAnalytics /Users/apple/Desktop/julia_stuff/GithubAnalytics.jl/src/GitHubAnalytics.jl:198
+┌ Info: Fetching data for repo 62/71: sylvaticus/SymEngine.jl
+└ @ GitHubAnalytics /Users/apple/Desktop/julia_stuff/GithubAnalytics.jl/src/GitHubAnalytics.jl:198
+┌ Info: Fetching data for repo 63/71: sylvaticus/SymPy.jl
+└ @ GitHubAnalytics /Users/apple/Desktop/julia_stuff/GithubAnalytics.jl/src/GitHubAnalytics.jl:198
+┌ Info: Fetching data for repo 64/71: sylvaticus/SystemBenchmark.jl
+└ @ GitHubAnalytics /Users/apple/Desktop/julia_stuff/GithubAnalytics.jl/src/GitHubAnalytics.jl:198
+┌ Info: Fetching data for repo 65/71: sylvaticus/testGit
+└ @ GitHubAnalytics /Users/apple/Desktop/julia_stuff/GithubAnalytics.jl/src/GitHubAnalytics.jl:198
+┌ Info: Fetching data for repo 66/71: sylvaticus/testgit1
+└ @ GitHubAnalytics /Users/apple/Desktop/julia_stuff/GithubAnalytics.jl/src/GitHubAnalytics.jl:198
+┌ Info: Fetching data for repo 67/71: sylvaticus/testgit2
+└ @ GitHubAnalytics /Users/apple/Desktop/julia_stuff/GithubAnalytics.jl/src/GitHubAnalytics.jl:198
+┌ Info: Fetching data for repo 68/71: sylvaticus/testGit3
+└ @ GitHubAnalytics /Users/apple/Desktop/julia_stuff/GithubAnalytics.jl/src/GitHubAnalytics.jl:198
+┌ Info: Fetching data for repo 69/71: sylvaticus/testQuestions
+└ @ GitHubAnalytics /Users/apple/Desktop/julia_stuff/GithubAnalytics.jl/src/GitHubAnalytics.jl:198
+┌ Info: Fetching data for repo 70/71: sylvaticus/travis-broken-example
+└ @ GitHubAnalytics /Users/apple/Desktop/julia_stuff/GithubAnalytics.jl/src/GitHubAnalytics.jl:198
+┌ Info: Fetching data for repo 71/71: sylvaticus/www.julialang.org
+└ @ GitHubAnalytics /Users/apple/Desktop/julia_stuff/GithubAnalytics.jl/src/GitHubAnalytics.jl:198
+┌ Info: Finished fetching data.
+│   successful_repos = 71
+│   failed_or_skipped_repos = 0
+│   total_identified = 71
+│   duration_minutes = 3.4
+└ @ GitHubAnalytics /Users/apple/Desktop/julia_stuff/GithubAnalytics.jl/src/GitHubAnalytics.jl:228
+┌ Info: Processing fetched data for 71 repositories...
+└ @ GitHubAnalytics /Users/apple/Desktop/julia_stuff/GithubAnalytics.jl/src/GitHubAnalytics.jl:111
+┌ Info: Starting data processing...
+└ @ GitHubAnalytics /Users/apple/Desktop/julia_stuff/GithubAnalytics.jl/src/processing.jl:61
+┌ Info: Aggregated commit counts for 2064 unique contributors.
+└ @ GitHubAnalytics /Users/apple/Desktop/julia_stuff/GithubAnalytics.jl/src/processing.jl:239
+┌ Info: Aggregated daily commit counts for 44 days.
+└ @ GitHubAnalytics /Users/apple/Desktop/julia_stuff/GithubAnalytics.jl/src/processing.jl:271
+┌ Info: Aggregated language distribution for 10 languages.
+└ @ GitHubAnalytics /Users/apple/Desktop/julia_stuff/GithubAnalytics.jl/src/processing.jl:288
+┌ Info: Calculated overall statistics.
+└ @ GitHubAnalytics /Users/apple/Desktop/julia_stuff/GithubAnalytics.jl/src/processing.jl:322
+┌ Info: Issue close time statistics calculated
+│   stats = Dict{String, Any}("mean_close_time_days" => 27.799240910117433, "min_close_time_days" => 0.0, "p75_close_time_days" => 15.554108796296298, "p90_close_time_days" => 76.56929629629627, "p25_close_time_days" => 0.1680613425925926, "median_close_time_days" => 1.9962152777777777, "max_close_time_days" => 826.050775462963, "total_closed_issues_with_data" => 123)
+└ @ GitHubAnalytics /Users/apple/Desktop/julia_stuff/GithubAnalytics.jl/src/processing.jl:338
+┌ Info: Data processing complete.
+└ @ GitHubAnalytics /Users/apple/Desktop/julia_stuff/GithubAnalytics.jl/src/processing.jl:401
+┌ Info: Finished processing data in 1.6s.
+└ @ GitHubAnalytics /Users/apple/Desktop/julia_stuff/GithubAnalytics.jl/src/GitHubAnalytics.jl:115
+┌ Info: Generating outputs...
+└ @ GitHubAnalytics /Users/apple/Desktop/julia_stuff/GithubAnalytics.jl/src/GitHubAnalytics.jl:122
+┌ Info: Generating CSV reports...
+└ @ GitHubAnalytics /Users/apple/Desktop/julia_stuff/GithubAnalytics.jl/src/reporting.jl:16
+┌ Info: Repository metrics saved to organalysis_2025-05-02_200803/repository_metrics_2025-05-02_201136.csv
+└ @ GitHubAnalytics /Users/apple/Desktop/julia_stuff/GithubAnalytics.jl/src/reporting.jl:51
+┌ Info: Contributor summary saved to organalysis_2025-05-02_200803/contributor_summary_2025-05-02_201136.csv
+└ @ GitHubAnalytics /Users/apple/Desktop/julia_stuff/GithubAnalytics.jl/src/reporting.jl:58
+┌ Info: Overall commit activity saved to organalysis_2025-05-02_200803/overall_commit_activity_2025-05-02_201136.csv
+└ @ GitHubAnalytics /Users/apple/Desktop/julia_stuff/GithubAnalytics.jl/src/reporting.jl:66
+┌ Info: Language distribution saved to organalysis_2025-05-02_200803/language_distribution_2025-05-02_201136.csv
+└ @ GitHubAnalytics /Users/apple/Desktop/julia_stuff/GithubAnalytics.jl/src/reporting.jl:74
+┌ Info: CSV report generation finished.
+└ @ GitHubAnalytics /Users/apple/Desktop/julia_stuff/GithubAnalytics.jl/src/reporting.jl:78
+┌ Info: Issue close times saved to organalysis_2025-05-02_200803/issue_close_times_2025-05-02_201136.csv
+└ @ GitHubAnalytics /Users/apple/Desktop/julia_stuff/GithubAnalytics.jl/src/reporting.jl:90
+┌ Info: Generating markdown summary report...
+└ @ GitHubAnalytics /Users/apple/Desktop/julia_stuff/GithubAnalytics.jl/src/reporting.jl:107
+┌ Info: Markdown report generated successfully at: organalysis_2025-05-02_200803/github_analysis_report.md
+└ @ GitHubAnalytics /Users/apple/Desktop/julia_stuff/GithubAnalytics.jl/src/reporting.jl:319
+┌ Info: Generating visualizations...
+└ @ GitHubAnalytics /Users/apple/Desktop/julia_stuff/GithubAnalytics.jl/src/plotting.jl:897
+┌ Info: Plot saved successfully: organalysis_2025-05-02_200803/top_repos_by_stars.png
+└ @ GitHubAnalytics /Users/apple/Desktop/julia_stuff/GithubAnalytics.jl/src/plotting.jl:47
+┌ Info: Plot saved successfully: organalysis_2025-05-02_200803/top_repos_by_monthly_commits.png
+└ @ GitHubAnalytics /Users/apple/Desktop/julia_stuff/GithubAnalytics.jl/src/plotting.jl:47
+┌ Info: Plot saved successfully: organalysis_2025-05-02_200803/issue_status_stacked.png
+└ @ GitHubAnalytics /Users/apple/Desktop/julia_stuff/GithubAnalytics.jl/src/plotting.jl:47
+┌ Info: Plot saved successfully: organalysis_2025-05-02_200803/issue_status_percentage.png
+└ @ GitHubAnalytics /Users/apple/Desktop/julia_stuff/GithubAnalytics.jl/src/plotting.jl:47
+┌ Info: Commit activity data shape: (44, 2). First row: DataFrameRow
+│  Row │ date        commit_count
+│      │ Date        Int64
+│ ─────┼──────────────────────────
+│    1 │ 2024-05-03             1
+└ @ GitHubAnalytics /Users/apple/Desktop/julia_stuff/GithubAnalytics.jl/src/plotting.jl:207
+┌ Info: Found 109 commits across 44 days
+└ @ GitHubAnalytics /Users/apple/Desktop/julia_stuff/GithubAnalytics.jl/src/plotting.jl:246
+┌ Info: Plot saved successfully: organalysis_2025-05-02_200803/overall_commit_activity.png
+└ @ GitHubAnalytics /Users/apple/Desktop/julia_stuff/GithubAnalytics.jl/src/plotting.jl:47
+┌ Info: Successfully created commit activity plot
+└ @ GitHubAnalytics /Users/apple/Desktop/julia_stuff/GithubAnalytics.jl/src/plotting.jl:278
+┌ Info: Plot saved successfully: organalysis_2025-05-02_200803/top_contributors.png
+└ @ GitHubAnalytics /Users/apple/Desktop/julia_stuff/GithubAnalytics.jl/src/plotting.jl:47
+┌ Info: Plot saved successfully: organalysis_2025-05-02_200803/overall_issue_distribution_pie.png
+└ @ GitHubAnalytics /Users/apple/Desktop/julia_stuff/GithubAnalytics.jl/src/plotting.jl:47
+┌ Info: Plot saved successfully: organalysis_2025-05-02_200803/pull_request_summary.png
+└ @ GitHubAnalytics /Users/apple/Desktop/julia_stuff/GithubAnalytics.jl/src/plotting.jl:47
+┌ Info: Plot saved successfully: organalysis_2025-05-02_200803/language_distribution_pie.png
+└ @ GitHubAnalytics /Users/apple/Desktop/julia_stuff/GithubAnalytics.jl/src/plotting.jl:47
+┌ Info: Plot saved successfully: organalysis_2025-05-02_200803/issue_close_time_distribution.png
+└ @ GitHubAnalytics /Users/apple/Desktop/julia_stuff/GithubAnalytics.jl/src/plotting.jl:47
+┌ Info: Successfully created issue close time bar distribution plot
+└ @ GitHubAnalytics /Users/apple/Desktop/julia_stuff/GithubAnalytics.jl/src/plotting.jl:583
+┌ Warning: Failed to create violin for MultiDimEquations.jl
+│   exception = ErrorException("No recipe for density with args: Tuple{Vector{Int64}, Vector{Float64}}")
+└ @ GitHubAnalytics /Users/apple/Desktop/julia_stuff/GithubAnalytics.jl/src/plotting.jl:662
+┌ Warning: Failed to create violin for SPMLJ
+│   exception = ErrorException("No recipe for density with args: Tuple{Vector{Int64}, Vector{Float64}}")
+└ @ GitHubAnalytics /Users/apple/Desktop/julia_stuff/GithubAnalytics.jl/src/plotting.jl:662
+┌ Warning: Failed to create violin for juliatutorial
+│   exception = ErrorException("No recipe for density with args: Tuple{Vector{Int64}, Vector{Float64}}")
+└ @ GitHubAnalytics /Users/apple/Desktop/julia_stuff/GithubAnalytics.jl/src/plotting.jl:662
+┌ Warning: Failed to create violin for OdsIO.jl
+│   exception = ErrorException("No recipe for density with args: Tuple{Vector{Int64}, Vector{Float64}}")
+└ @ GitHubAnalytics /Users/apple/Desktop/julia_stuff/GithubAnalytics.jl/src/plotting.jl:662
+┌ Warning: Failed to create violin for BetaML.jl
+│   exception = ErrorException("No recipe for density with args: Tuple{Vector{Int64}, Vector{Float64}}")
+└ @ GitHubAnalytics /Users/apple/Desktop/julia_stuff/GithubAnalytics.jl/src/plotting.jl:662
+┌ Warning: Failed to create violin for LAJuliaUtils.jl
+│   exception = ErrorException("No recipe for density with args: Tuple{Vector{Int64}, Vector{Float64}}")
+└ @ GitHubAnalytics /Users/apple/Desktop/julia_stuff/GithubAnalytics.jl/src/plotting.jl:662
+┌ Info: Plot saved successfully: organalysis_2025-05-02_200803/issue_close_time_violin.png
+└ @ GitHubAnalytics /Users/apple/Desktop/julia_stuff/GithubAnalytics.jl/src/plotting.jl:47
+┌ Info: Successfully created issue close time violin plot
+└ @ GitHubAnalytics /Users/apple/Desktop/julia_stuff/GithubAnalytics.jl/src/plotting.jl:675
+┌ Info: Using all available issue close data (123 issues) for trend analysis
+└ @ GitHubAnalytics /Users/apple/Desktop/julia_stuff/GithubAnalytics.jl/src/plotting.jl:725
+┌ Info: Plot saved successfully: organalysis_2025-05-02_200803/issue_close_time_trend.png
+└ @ GitHubAnalytics /Users/apple/Desktop/julia_stuff/GithubAnalytics.jl/src/plotting.jl:47
+┌ Info: Successfully created issue close time trend plot
+└ @ GitHubAnalytics /Users/apple/Desktop/julia_stuff/GithubAnalytics.jl/src/plotting.jl:863
+┌ Info: Visualizations generation attempted. Check logs for success/failure of individual plots.
+└ @ GitHubAnalytics /Users/apple/Desktop/julia_stuff/GithubAnalytics.jl/src/plotting.jl:939
+┌ Info: Finished generating outputs in 20.5s.
+└ @ GitHubAnalytics /Users/apple/Desktop/julia_stuff/GithubAnalytics.jl/src/GitHubAnalytics.jl:128
+┌ Info: GitHub Analytics run complete. Results for 71 repositories saved in: organalysis_2025-05-02_200803
+└ @ GitHubAnalytics /Users/apple/Desktop/julia_stuff/GithubAnalytics.jl/src/GitHubAnalytics.jl:131

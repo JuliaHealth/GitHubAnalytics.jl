@@ -1,0 +1,3 @@
+[deps]
+Documenter = "e30172f5-a6a5-5a46-863b-614d45cd2de4"
+GithubAnalytics = "8d9325f6-71fa-4d38-bfe5-da3f6cfa1af4"
