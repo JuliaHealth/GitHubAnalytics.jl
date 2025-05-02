@@ -1,8 +1,5 @@
 # src/config.jl
-module Configs
 using Parameters, Logging, Dates
-
-export AnalyticsConfig # Export it so users can create it
 
 """
     AnalyticsConfig
@@ -53,5 +50,3 @@ end
 #     config.max_repos_in_plots > 0 || throw(ArgumentError("`max_repos_in_plots` must be positive."))
 #     # ... more checks
 # end
-
-end#module Configs

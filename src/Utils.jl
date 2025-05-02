@@ -1,8 +1,5 @@
-module Utils
 # src/utils.jl
 using Logging, LoggingExtras, Dates
-
-export setup_logger
 
 """
     setup_logger(config::AnalyticsConfig) -> AbstractLogger
@@ -31,5 +28,3 @@ end
 # Add other utility functions here if needed later, e.g.,
 # function handle_github_api_error(e, context_message, logger) ...
 # function format_repo_name(owner, repo) ...
-
-end#module Utils

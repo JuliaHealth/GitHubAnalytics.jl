@@ -1,12 +1,7 @@
-module Fetching
 # src/fetching.jl
 using GitHub
 using Dates
 using Logging
-using .Structs # Use the structs defined in the parent module's scope
-# Assuming structs.jl defines: RepoBasicInfo, ContributorMetrics, CommitHistoryEntry, PullRequestMetrics
-
-export fetch_basic_repo_info, fetch_issues, fetch_contributors, fetch_commit_history, fetch_pull_requests
 
 # Helper for pagination (can be reused)
 function fetch_paginated_data(func::Function, args...; auth, logger, params=Dict(), context="")
@@ -286,5 +281,3 @@ function fetch_pull_requests(repo_name::String, auth::GitHub.Authorization, logg
     @debug "Total PRs fetched (open+closed+merged) for $repo_name: $(length(all_prs))"
     return all_prs
 end
-
-end#module Fetching

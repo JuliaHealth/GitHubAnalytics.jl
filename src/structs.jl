@@ -1,8 +1,5 @@
-module BasicStructs
 # src/structs.jl
 using Dates
-
-export RepoBasicInfo, RepoMetrics, ContributorMetrics, CommitHistoryEntry, PullRequestMetrics
 
 # --- Renamed and Simplified Base Info ---
 """
@@ -120,4 +117,3 @@ struct PullRequestMetrics
     avg_merge_time_days::Union{Float64, Nothing} # Average for merged PRs in fetched data
     # Consider adding: distribution of merge times, avg time to first comment, etc.
 end
-end#module BasicStructs
