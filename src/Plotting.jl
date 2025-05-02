@@ -93,62 +93,102 @@ function _plot_issue_status_stacked(repo_metrics::Vector{RepoMetrics}, config::A
      closed_issues = [m.closed_issues for m in plot_metrics]
      total_issues = [m.total_issues for m in plot_metrics]
      
-     # Calculate percentage for better relative magnitude visualization
-     open_pct = [m.open_issues / m.total_issues for m in plot_metrics]
-     closed_pct = [m.closed_issues / m.total_issues for m in plot_metrics]
+     # Create a clean, professional stacked bar chart following example image
+     fig_stacked = Figure(size=(1200, 800))
+     ax_stacked = Axis(fig_stacked[1, 1],
+                   title = "Issue Status Distribution (Stacked)",
+                   xlabel = "",
+                   ylabel = "Number of Issues",
+                   xticklabelrotation = π/4,
+                   xticklabelalign = (:right, :center))
      
-     x = 1:display_count
+     # Create positions on x-axis
+     bar_positions = collect(1:display_count)
      
-     # Create two figures: one with absolute counts and one with percentages
-     fig_counts, ax_counts = _setup_figure_axis("Issue Status for Top $(display_count) Repositories", 
-                                  ylabel = "Number of Issues", 
-                                  xticklabelrotation = π/4)
+     # Add grid lines for better readability
+     ax_stacked.xgridvisible = false
+     ax_stacked.ygridvisible = true
+     ax_stacked.ygridcolor = (:black, 0.1)
      
-     fig_pct, ax_pct = _setup_figure_axis("Issue Status Distribution (Percentage)", 
-                                  ylabel = "Percentage of Issues", 
-                                  xticklabelrotation = π/4)
+     # Calculate max value for y-axis limit
+     max_issues = maximum(total_issues)
+     y_limit = ceil(max_issues * 1.1 / 100) * 100  # Round to nearest 100 above max
      
-     # Absolute count plot
-     barplot!(ax_counts, x, closed_issues, color = :royalblue, label = "Closed Issues")
-     barplot!(ax_counts, x, open_issues, color = :indianred, label = "Open Issues", 
-              stack = closed_issues)
+     # First draw the closed issues as the base of the stacked bar
+     barplot!(ax_stacked, bar_positions, closed_issues, color = :royalblue)
      
-     # Add total issue counts as text labels on top of each bar
-     for (i, total) in enumerate(total_issues)
-         text!(ax_counts, i, total + (total * 0.03), text = "$(total)", 
-               align = (:center, :bottom), fontsize = 12)
-     end
-     
-     # Percentage plot
-     barplot!(ax_pct, x, closed_pct, color = :royalblue, label = "Closed Issues")
-     barplot!(ax_pct, x, open_pct, color = :indianred, label = "Open Issues", 
-              stack = closed_pct)
-     
-     # Add percentage labels
-     for (i, (open_p, closed_p)) in enumerate(zip(open_pct, closed_pct))
-         # Label for closed percentage at the middle of its section
-         text!(ax_pct, i, closed_p/2, text = "$(round(Int, closed_p*100))%", 
-               align = (:center, :center), fontsize = 12, color = :white)
-         
-         # Label for open percentage at the middle of its section (if large enough)
-         if open_p > 0.1  # Only add label if segment is large enough
-             text!(ax_pct, i, closed_p + open_p/2, text = "$(round(Int, open_p*100))%", 
-                  align = (:center, :center), fontsize = 12, color = :white)
+     # Then draw open issues stacked on top
+     for i in 1:display_count
+         # Only add open issues bar if there are any
+         if open_issues[i] > 0
+             # Create a small rectangle for each open issue segment
+             rect = Rect(bar_positions[i] - 0.4, closed_issues[i], 0.8, open_issues[i])
+             poly!(ax_stacked, rect, color = :indianred)
          end
      end
      
+     # Add legend elements
+     elements = [PolyElement(polycolor = c) for c in [:royalblue, :indianred]]
+     legend_labels = ["Closed Issues", "Open Issues"]
+     Legend(fig_stacked[1, 1, TopRight()], elements, legend_labels, framevisible = false)
+     
+     # Fix the negative values issue by explicitly setting y limits to start at 0
+     ylims!(ax_stacked, (0, y_limit))
+     
      # Set axis properties
-     ax_counts.xticks = (x, repo_names)
-     ax_pct.xticks = (x, repo_names)
-     ylims!(ax_pct, (0, 1.0))
+     ax_stacked.xticks = (bar_positions, repo_names)
      
-     # Add legends
-     axislegend(ax_counts, position = :rt)
-     axislegend(ax_pct, position = :rt)
+     # Fix the legend marker that was appearing at -100
+     # Instead of using scatter with off-screen points, we use PolyElement for both legend entries
      
-     # Save plots
-     _save_plot(fig_counts, "issue_status_top_repos", config.output_dir, logger)
-     _save_plot(fig_pct, "issue_status_percentage", config.output_dir, logger)
+     # Save the improved stacked version
+     _save_plot(fig_stacked, "issue_status_stacked", config.output_dir, logger)
+     
+     # Create percentage distribution chart as well
+     if any(total_issues .> 0)
+         open_pct = [m.open_issues / m.total_issues for m in plot_metrics]
+         closed_pct = [m.closed_issues / m.total_issues for m in plot_metrics]
+         
+         fig_pct = Figure(size=(1200, 800))
+         ax_pct = Axis(fig_pct[1, 1],
+                    title = "Issue Status Distribution (Percentage)",
+                    xlabel = "",
+                    ylabel = "Percentage of Issues",
+                    xticklabelrotation = π/4,
+                    xticklabelalign = (:right, :center))
+         
+         # Add grid lines
+         ax_pct.xgridvisible = false
+         ax_pct.ygridvisible = true
+         ax_pct.ygridcolor = (:black, 0.1)
+         
+         # Draw closed issue percentages
+         barplot!(ax_pct, bar_positions, closed_pct, color = :royalblue)
+         
+         # Draw open issue percentages on top
+         for i in 1:display_count
+             # Only add open issues if there are any
+             if open_pct[i] > 0
+                 rect = Rect(bar_positions[i] - 0.4, closed_pct[i], 0.8, open_pct[i])
+                 poly!(ax_pct, rect, color = :indianred)
+             end
+         end
+         
+         # Add legend
+         Legend(fig_pct[1, 1, TopRight()], elements, legend_labels, framevisible = false)
+         
+         # Set axis properties
+         ax_pct.xticks = (bar_positions, repo_names)
+         ylims!(ax_pct, (0, 1.0))
+         
+         # Show percentages on y-axis
+         ax_pct.yticks = (0:0.2:1.0, ["0%", "20%", "40%", "60%", "80%", "100%"])
+         
+         _save_plot(fig_pct, "issue_status_percentage", config.output_dir, logger)
+     end
+     
+     # We'll keep the separate bars visualization as an additional option
+     return
 end
 
 function _plot_overall_commit_activity(commit_activity::DataFrame, config::AnalyticsConfig, logger::AbstractLogger)
@@ -438,12 +478,12 @@ end
 """
     _plot_issue_close_time_distribution(issue_close_times::DataFrame, config::AnalyticsConfig, logger::AbstractLogger)
 
-Plots a violin plot showing the distribution of time to close issues for top repositories.
+Plots a bar chart showing the median time to close issues for top repositories.
 This visualization helps identify repository health by showing how quickly issues are addressed.
 """
 function _plot_issue_close_time_distribution(issue_close_times::DataFrame, config::AnalyticsConfig, logger::AbstractLogger)
-    if isempty(issue_close_times) || nrow(issue_close_times) == 0
-        @info "No issue close time data available. Skipping issue close time distribution plot."
+    if isempty(issue_close_times) || nrow(issue_close_times) < 5
+        @info "No or insufficient issue close time data available. Skipping issue close time distribution plot."
         return
     end
     
@@ -455,81 +495,184 @@ function _plot_issue_close_time_distribution(issue_close_times::DataFrame, confi
     end
     
     # Get top repositories by number of closed issues
-    top_repos_df = combine(groupby(issue_close_times, :repo_name), nrow => :count)
-    sort!(top_repos_df, :count, rev=true)
+    top_repos_df = combine(groupby(issue_close_times, :repo_name), 
+                          nrow => :issue_count,
+                          :close_time_days => median => :median_days,
+                          :close_time_days => mean => :mean_days)
+    
+    # Filter to repos with at least 3 issues
+    top_repos_df = filter(row -> row.issue_count >= 3, top_repos_df)
+    
+    if nrow(top_repos_df) == 0
+        @info "No repositories with sufficient issue data for close time analysis."
+        return
+    end
+    
+    # Sort by median time to close
+    sort!(top_repos_df, :median_days)
     
     # Limit to top repositories for readability
     display_count = min(config.max_repos_in_plots, nrow(top_repos_df))
-    top_repos = top_repos_df.repo_name[1:display_count]
-    
-    # Filter data to include only top repositories
-    plot_data = filter(row -> row.repo_name in top_repos, issue_close_times)
+    top_repos_df = top_repos_df[1:display_count, :]
     
     # Clean repository names for display (remove owner part)
-    plot_data.repo_display = [split(r, '/')[end] for r in plot_data.repo_name]
+    top_repos_df.repo_display = String.([split(r, '/')[end] for r in top_repos_df.repo_name])
     
-    # Create the figure
-    fig = Figure(size = (900, 600))
-    ax = Axis(fig[1, 1], 
-              title = "Issue Close Time Distribution", 
-              xlabel = "Repository", 
-              ylabel = "Days to Close",
-              xticklabelrotation = π/4)
+    # Create the bar chart visualization
+    _plot_issue_close_time_bar(issue_close_times, top_repos_df, config, logger)
     
+    # Try to create a violin plot as well
     try
-        # Create violin plot
-        violin!(ax, plot_data.repo_display, plot_data.close_time_days, 
-                show_median = true, side = :both)
+        _plot_issue_close_time_violin(issue_close_times, top_repos_df, config, logger)
+    catch e
+        @error "Failed to create violin plot for issue close times" exception=(e, catch_backtrace())
+    end
+end
+
+function _plot_issue_close_time_bar(issue_close_times::DataFrame, top_repos_df::DataFrame, config::AnalyticsConfig, logger::AbstractLogger)
+    # Create the figure with improved styling
+    fig = Figure(size = (1200, 800))
+    
+    # Create median time plot
+    ax1 = Axis(fig[1, 1], 
+              title = "Median Issue Close Times by Repository",
+              xlabel = "Repository", 
+              ylabel = "Days to Close (Median)",
+              xticklabelrotation = π/4,
+              xticklabelalign = (:right, :center))
+    
+    # Add grid lines
+    ax1.xgridvisible = false
+    ax1.ygridvisible = true
+    ax1.ygridcolor = (:black, 0.1)
+    
+    # Create numeric x positions for barplot
+    x = 1:nrow(top_repos_df)
+    
+    # Calculate max for y limit
+    max_days = maximum(max.(top_repos_df.median_days, top_repos_df.mean_days))
+    y_limit = ceil(max_days * 1.2)  # Give 20% extra space for labels
+    
+    # Bar plot of median days with improved styling
+    bars = barplot!(ax1, x, top_repos_df.median_days, color = :royalblue)
+    
+    # Set custom x ticks with repository names
+    ax1.xticks = (x, top_repos_df.repo_display)
+    
+    # Add issue count as text labels
+    for (i, count) in enumerate(top_repos_df.issue_count)
+        text!(ax1, i, 1, text = "$(count) issues", 
+              align = (:center, :bottom), fontsize = 12,
+              rotation = π/2, color = :black)
+    end
+    
+    # Add means as points for comparison
+    scatter!(ax1, x, top_repos_df.mean_days, 
+            color = :firebrick, markersize = 10,
+            label = "Mean")
+    
+    # Legend
+    Legend(fig[1, 1, TopRight()], [PolyElement(polycolor = :royalblue), MarkerElement(color=:firebrick, marker=:circle)], 
+           ["Median", "Mean"], framevisible = false)
+    
+    # Set y limit
+    ylims!(ax1, (0, y_limit))
+    
+    # Save the plot
+    _save_plot(fig, "issue_close_time_distribution", config.output_dir, logger)
+    @info "Successfully created issue close time bar distribution plot"
+end
+
+function _plot_issue_close_time_violin(issue_close_times::DataFrame, top_repos_df::DataFrame, config::AnalyticsConfig, logger::AbstractLogger)
+    # First prepare data for violin plot - we need to gather all the issue close times for each repo
+    violin_data = Dict{String, Vector{Float64}}()
+    
+    for repo in top_repos_df.repo_name
+        # Extract data for this repository
+        repo_data = filter(row -> row.repo_name == repo, issue_close_times)
+        violin_data[repo] = repo_data.close_time_days
+    end
+    
+    # Create figure for violin plot
+    fig = Figure(size = (1200, 800))
+    
+    ax = Axis(fig[1, 1],
+             title = "Issue Close Time Distribution by Repository",
+             xlabel = "Repository",
+             ylabel = "Days to Close",
+             xticklabelrotation = π/4,
+             xticklabelalign = (:right, :center))
+    
+    # Add grid lines
+    ax.xgridvisible = false
+    ax.ygridvisible = true
+    ax.ygridcolor = (:black, 0.1)
+    
+    # Calculate overall statistics for y-axis scaling
+    all_times = vcat(values(violin_data)...)
+    
+    if isempty(all_times)
+        @info "No close time data for violin plot"
+        return
+    end
+    
+    # Calculate percentiles for better y-axis limits (excludes extreme outliers)
+    q3 = quantile(all_times, 0.75)
+    upper_limit = q3 * 3  # Show up to 3x the third quartile
+    y_max = min(maximum(all_times), upper_limit)
+    
+    # Create numeric positions
+    x_positions = 1:length(top_repos_df.repo_display)
+    
+    # Create violin plots - one per repository
+    for (i, repo) in enumerate(top_repos_df.repo_name)
+        display_name = top_repos_df.repo_display[i]
+        data = violin_data[repo]
         
-        # Add boxplot overlay for more statistical insight
-        boxplot!(ax, plot_data.repo_display, plot_data.close_time_days, 
-                 show_outliers = false, show_notch = true,
-                 width = 0.2, color = (:black, 0.3))
-        
-        # Add median values as text
-        for repo in unique(plot_data.repo_display)
-            repo_data = filter(row -> row.repo_display == repo, plot_data).close_time_days
-            if !isempty(repo_data)
-                median_val = round(median(repo_data), digits=1)
-                x_pos = findfirst(r -> r == repo, unique(plot_data.repo_display))
-                text!(ax, x_pos, median_val, text = "$(median_val) days", 
-                      align = (:center, :bottom), fontsize = 12)
+        if length(data) >= 3  # Only plot if we have enough data points
+            # Fix: Create violins one by one, using positions instead of strings
+            try
+                density!(ax, fill(x_positions[i], length(data)), data, 
+                        orientation = :vertical,
+                        color = (:royalblue, 0.6), 
+                        strokecolor = :black, 
+                        strokewidth = 1,
+                        side = :both)
+                        
+                # Add median line
+                median_val = median(data)
+                lines!(ax, [x_positions[i]-0.3, x_positions[i]+0.3], [median_val, median_val], 
+                      color = :black, linewidth = 2)
+                
+                # Add median value as text 
+                text!(ax, x_positions[i], median_val, 
+                      text = "$(round(Int, median_val))", 
+                      align = (:center, :bottom), 
+                      fontsize = 10, 
+                      color = :black)
+                      
+                # Add issue count
+                text!(ax, x_positions[i], minimum(data), 
+                      text = "n=$(length(data))", 
+                      align = (:center, :top), 
+                      fontsize = 10,
+                      rotation = π/2, 
+                      color = :black)
+            catch e
+                @warn "Failed to create violin for $(display_name)" exception=e
             end
         end
-        
-        # Limit y-axis for better visualization (exclude extreme outliers)
-        close_times = plot_data.close_time_days
-        q3 = quantile(close_times, 0.75)
-        upper_limit = q3 * 3  # 3 times the third quartile is a reasonable upper limit
-        ylims!(ax, (0, min(upper_limit, maximum(close_times))))
-        
-        # Save the plot
-        _save_plot(fig, "issue_close_time_distribution", config.output_dir, logger)
-        @info "Successfully created issue close time distribution plot"
-        
-    catch e
-        @error "Error creating issue close time distribution plot" exception=(e, catch_backtrace())
-        
-        # Create a simple fallback
-        try
-            fig_fallback = Figure(size=(800, 400))
-            median_vals = combine(groupby(plot_data, :repo_display), :close_time_days => median => :median_days)
-            sort!(median_vals, :median_days)
-            
-            ax_fallback = Axis(fig_fallback[1, 1], 
-                             title = "Median Issue Close Times", 
-                             xlabel = "Repository", 
-                             ylabel = "Median Days to Close",
-                             xticklabelrotation = π/4)
-            
-            barplot!(ax_fallback, median_vals.repo_display, median_vals.median_days, 
-                    color = :steelblue)
-            
-            _save_plot(fig_fallback, "issue_close_time_medians", config.output_dir, logger)
-        catch e2
-            @error "Even fallback visualization failed" exception=e2
-        end
     end
+    
+    # Set the x-ticks to display repository names
+    ax.xticks = (x_positions, top_repos_df.repo_display)
+    
+    # Set y limits to make visualization more readable
+    ylims!(ax, (0, y_max))
+    
+    # Save the plot
+    _save_plot(fig, "issue_close_time_violin", config.output_dir, logger)
+    @info "Successfully created issue close time violin plot"
 end
 
 """
@@ -584,88 +727,136 @@ function _plot_issue_close_time_trend(issue_close_times::DataFrame, config::Anal
         @info "Using last 2 years of issue close data ($(nrow(filtered_data)) issues) for trend analysis"
     end
     
-    # Calculate moving average (30 issue window)
-    window_size = min(30, div(nrow(filtered_data), 3))
-    if window_size < 5
-        window_size = 5  # Minimum window size
+    # Group by quarter to make the trend more readable
+    filtered_data.quarter = [Date(year(d), 3*ceil(Int, month(d)/3), 1) for d in filtered_data.closed_date]
+    
+    # Calculate quarterly stats
+    quarterly_stats = combine(groupby(filtered_data, :quarter), 
+                            :close_time_days => mean => :mean_days,
+                            :close_time_days => median => :median_days,
+                            nrow => :count)
+    
+    # Ensure we have enough quarters to plot
+    if nrow(quarterly_stats) < 3
+        @info "Not enough quarterly data points for trend analysis."
+        return
     end
     
-    moving_avg = Vector{Float64}()
-    dates = Vector{Date}()
+    # Sort by quarter
+    sort!(quarterly_stats, :quarter)
     
-    # Calculate moving averages
-    for i in window_size:nrow(filtered_data)
-        window = filtered_data.close_time_days[(i-window_size+1):i]
-        push!(moving_avg, mean(window))
-        push!(dates, filtered_data.closed_date[i])
-    end
+    # Create quarter labels in a readable format
+    quarter_labels = [string(year(q), " Q", ceil(Int, month(q)/3)) for q in quarterly_stats.quarter]
     
-    # Group by month and calculate statistics
-    filtered_data.month = Date.(year.(filtered_data.closed_date), month.(filtered_data.closed_date), 1)
-    monthly_stats = combine(groupby(filtered_data, :month), 
-                           :close_time_days => mean => :mean_days,
-                           :close_time_days => median => :median_days,
-                           nrow => :count)
-    
-    # Create the plot
+    # Create improved plot with better styling
     try
-        fig = Figure(size = (1000, 600))
-        ga = fig[1, 1] = GridLayout()
+        fig = Figure(size = (1200, 800))
         
-        # Main trend plot
-        ax1 = Axis(ga[1, 1], 
-                  title = "Issue Close Time Trend", 
-                  xlabel = "Date", 
-                  ylabel = "Days to Close (Moving Avg, window=$window_size)")
+        # Layout with proper spacing
+        gl = GridLayout(fig[1, 1])
         
-        # Plot moving average
-        lines!(ax1, dates, moving_avg, color = :royalblue, linewidth = 2)
+        # Main trend plot - taking more vertical space
+        ax1 = Axis(gl[1, 1], 
+                  title = "Issue Close Time Quarterly Trend",
+                  ylabel = "Days to Close",
+                  xticklabelrotation = π/4,
+                  xticklabelalign = (:right, :center))
         
-        # Add monthly stats as scatter points
-        scatter!(ax1, monthly_stats.month, monthly_stats.median_days, 
-                color = :indianred, markersize = 8 .* sqrt.(monthly_stats.count / maximum(monthly_stats.count)),
-                label = "Monthly Median")
+        # Better grid styling
+        ax1.xgridvisible = false
+        ax1.ygridvisible = true
+        ax1.ygridcolor = (:black, 0.1)
         
-        # Add improving/worsening indicator
-        if length(moving_avg) > 10
-            first_avg = mean(moving_avg[1:div(length(moving_avg), 5)])
-            last_avg = mean(moving_avg[end-div(length(moving_avg), 5):end])
+        # Use numeric positions for x-axis
+        x_numeric = 1:nrow(quarterly_stats)
+        
+        # Calculate y limit based on data
+        max_days = maximum(max.(quarterly_stats.median_days, quarterly_stats.mean_days))
+        y_limit = ceil(max_days * 1.2)  # 20% extra space
+        
+        # Plot median line with improved styling
+        lines!(ax1, x_numeric, quarterly_stats.median_days, 
+              color = :royalblue, linewidth = 3)
+              
+        # Add markers
+        scatter!(ax1, x_numeric, quarterly_stats.median_days,
+                color = :royalblue, markersize = 10, 
+                label = "Median")
+        
+        # Plot mean line with improved styling
+        lines!(ax1, x_numeric, quarterly_stats.mean_days, 
+              color = :firebrick, linewidth = 3)
+              
+        # Add markers
+        scatter!(ax1, x_numeric, quarterly_stats.mean_days,
+                color = :firebrick, markersize = 10, 
+                marker = :diamond, label = "Mean")
+        
+        # Set x labels
+        ax1.xticks = (x_numeric, quarter_labels)
+        
+        # Set y limit
+        ylims!(ax1, (0, y_limit))
+        
+        # Add issue count as bar chart at bottom
+        ax2 = Axis(gl[2, 1], 
+                  xlabel = "Quarter", 
+                  ylabel = "Issues Closed",
+                  xticklabelrotation = π/4,
+                  xticklabelalign = (:right, :center))
+        
+        # Style the count chart
+        ax2.xgridvisible = false
+        ax2.ygridvisible = true
+        ax2.ygridcolor = (:black, 0.1)
+        
+        # Plot issue counts
+        barplot!(ax2, x_numeric, quarterly_stats.count, color = :steelblue)
+        
+        # Set x labels
+        ax2.xticks = (x_numeric, quarter_labels)
+        
+        # Add trend indicator text if we have enough data points
+        if nrow(quarterly_stats) >= 4
+            # Calculate trend by comparing first and last quarters
+            first_quarters = quarterly_stats.median_days[1:2]
+            last_quarters = quarterly_stats.median_days[end-1:end]
+            
+            first_avg = mean(first_quarters)
+            last_avg = mean(last_quarters)
+            
             change_pct = round((last_avg - first_avg) / first_avg * 100, digits=1)
             
             if abs(change_pct) > 5  # Only show if change is significant
                 direction = change_pct > 0 ? "increased" : "decreased"
                 health = change_pct > 0 ? "slower" : "faster"
                 
-                annotation_text = "Issue close time has $direction by $(abs(change_pct))%\n(issues are being closed $health)"
+                # Create a text box with a clear background
+                box_width = 0.25 * length(x_numeric)
+                box_height = 0.15 * y_limit
+                box_x = 1
+                box_y = 0.75 * y_limit
                 
-                text!(ax1, dates[end-div(length(dates), 4)], 
-                      maximum(moving_avg) * 0.8, 
-                      text = annotation_text, 
-                      fontsize = 14, 
-                      align = (:center, :center),
-                      color = change_pct > 0 ? :firebrick : :forestgreen)
+                # Add white background to text for better readability
+                poly!(ax1, Rect(box_x, box_y - box_height/2, box_width, box_height), 
+                     color = (:white, 0.9), strokecolor = :gray, strokewidth = 1)
+                
+                # Place text over the background
+                text!(ax1, box_x + box_width/2, box_y, 
+                     text = "Issue close time has $direction\nby $(abs(change_pct))%\n(issues are being closed $health)", 
+                     fontsize = 16, 
+                     align = (:center, :center),
+                     color = change_pct > 0 ? :firebrick : :forestgreen)
             end
         end
         
-        # Add monthly issue count subplot
-        ax2 = Axis(ga[2, 1], 
-                  xlabel = "Date", 
-                  ylabel = "Issues Closed/Month")
+        # Add legend with better positioning
+        Legend(gl[1, 1, TopRight()], ax1, framevisible = false)
         
-        barplot!(ax2, monthly_stats.month, monthly_stats.count, color = :steelblue)
-        
-        # Link x-axes
-        linkyaxes!(ax1, ax2)
-        
-        # Set x limits to the same range
-        date_range = (minimum(dates), maximum(dates))
-        xlims!(ax1, date_range)
-        xlims!(ax2, date_range)
-        
-        # Layout adjustments
-        rowsize!(ga, 1, 0.7)
-        rowsize!(ga, 2, 0.3)
-        rowgap!(ga, 5)
+        # Layout adjustments for proper spacing
+        rowsize!(gl, 1, 0.7)  # Top row (trend) gets 70% of space
+        rowsize!(gl, 2, 0.3)  # Bottom row (counts) gets 30% of space
+        rowgap!(gl, 10)       # Gap between plots
         
         # Save the plot
         _save_plot(fig, "issue_close_time_trend", config.output_dir, logger)
@@ -674,30 +865,34 @@ function _plot_issue_close_time_trend(issue_close_times::DataFrame, config::Anal
     catch e
         @error "Error creating issue close time trend plot" exception=(e, catch_backtrace())
         
-        # Create a simple fallback plot
+        # Create a simplified fallback plot
         try
-            fig_fallback = Figure(size = (800, 400))
+            fig_fallback = Figure(size = (800, 500))
             ax = Axis(fig_fallback[1, 1], 
-                     title = "Monthly Median Issue Close Times", 
-                     xlabel = "Month", 
-                     ylabel = "Median Days to Close")
+                     title = "Quarterly Median Issue Close Times", 
+                     xlabel = "Quarter", 
+                     ylabel = "Median Days to Close",
+                     xticklabelrotation = π/4,
+                     xticklabelalign = (:right, :center))
             
-            barplot!(ax, string.(monthly_stats.month), monthly_stats.median_days, color = :steelblue)
-            ax.xticklabelrotation = π/4
+            # Use numeric indices for barplot
+            x_numeric = 1:length(quarter_labels)
+            barplot!(ax, x_numeric, quarterly_stats.median_days, color = :royalblue)
+            ax.xticks = (x_numeric, quarter_labels)
+            
+            # Style improvements
+            ax.xgridvisible = false
+            ax.ygridvisible = true
+            ax.ygridcolor = (:black, 0.1)
             
             _save_plot(fig_fallback, "issue_close_time_trend_simple", config.output_dir, logger)
         catch e2
-            @error "Even fallback visualization failed" exception=e2
+            @error "Fallback visualization also failed" exception=e2
         end
     end
 end
 
 # --- Main Plotting Function ---
-"""
-    generate_plots(processed_data::ProcessedData, config::AnalyticsConfig, logger::AbstractLogger)
-
-Generates all configured plots based on the processed data.
-"""
 function generate_plots(processed_data::ProcessedData, config::AnalyticsConfig, logger::AbstractLogger)
     @info "Generating visualizations..."
     # Check if repo_metrics exists and is not empty before proceeding
@@ -718,7 +913,7 @@ function generate_plots(processed_data::ProcessedData, config::AnalyticsConfig, 
     # Get issue close time data if available
     issue_close_times_df = isdefined(processed_data, :issue_close_times) ? processed_data.issue_close_times : DataFrame()
 
-    # Call individual plot functions safely
+    # Call individual plot functions safely - make sure to keep all original plots
     try _plot_repo_stars(repo_metrics_list, config, logger) catch e @error "Failed: _plot_repo_stars" exception=(e, catch_backtrace()) end
     try _plot_monthly_commits(repo_metrics_list, config, logger) catch e @error "Failed: _plot_monthly_commits" exception=(e, catch_backtrace()) end
     try _plot_issue_status_stacked(repo_metrics_list, config, logger) catch e @error "Failed: _plot_issue_status_stacked" exception=(e, catch_backtrace()) end
@@ -728,13 +923,12 @@ function generate_plots(processed_data::ProcessedData, config::AnalyticsConfig, 
     try _plot_pr_summary(pr_metrics_list, config, logger) catch e @error "Failed: _plot_pr_summary" exception=(e, catch_backtrace()) end
     try _plot_language_distribution_pie(language_df, config, logger) catch e @error "Failed: _plot_language_distribution_pie" exception=(e, catch_backtrace()) end
     
-    # Add the new issue close time distribution plot
+    # Add the issue close time plots only if we have data
     if !isempty(issue_close_times_df)
         try _plot_issue_close_time_distribution(issue_close_times_df, config, logger) 
         catch e @error "Failed: _plot_issue_close_time_distribution" exception=(e, catch_backtrace()) 
         end
         
-        # Add the new issue close time trend plot
         try _plot_issue_close_time_trend(issue_close_times_df, config, logger)
         catch e @error "Failed: _plot_issue_close_time_trend" exception=(e, catch_backtrace())
         end

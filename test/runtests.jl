@@ -34,7 +34,7 @@ function main()
     output_directory = "organalysis_$(Dates.format(now(), "yyyy-mm-dd_HHMMSS"))"
 
     config = AnalyticsConfig(
-        targets = targets, # Use specific repos instead of the whole org
+        targets = ["sylvaticus"], # Use specific repos instead of the whole org
         auth_token = token,
         output_dir = output_directory,
 
