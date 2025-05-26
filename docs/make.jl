@@ -1,23 +1,32 @@
-using GithubAnalytics
-using Documenter
+using Documenter, DocumenterVitepress
 
-DocMeta.setdocmeta!(GithubAnalytics, :DocTestSetup, :(using GithubAnalytics); recursive=true)
-
-makedocs(;
-    modules=[GithubAnalytics],
-    authors="JuliaHealth",
-    sitename="GithubAnalytics.jl",
-    format=Documenter.HTML(;
-        canonical="https://divital-coder.github.io/GithubAnalytics.jl",
-        edit_link="main",
-        assets=String[],
+makedocs(; 
+    sitename = "GithubAnalytics.jl", 
+    authors = "Divyansh Goyal <divital2004@gmail.com>",
+    format=DocumenterVitepress.MarkdownVitepress(
+        repo = "github.com/JuliaHealth/GithubAnalytics.jl", 
+        devbranch = "main",
+        devurl = "dev",
     ),
+    warnonly = true,
+    draft = false,
+    source = "src",
+    build = "build",
     pages=[
-        "Home" => "index.md",
-    ],
+        "Manual" => [
+            "Get Started" => "manual/get_started.md",
+            "Code" => "manual/code_example.md"
+        ],
+        "Developers' documentation" => [
+            "Image Registration" => "devs/image_registration.md"
+        ],
+        "api" => "api.md"
+        ],
 )
 
+# This is the critical part that creates the version structure
 deploydocs(;
-    repo="github.com/divital-coder/GithubAnalytics.jl",
-    devbranch="main",
+    repo = "github.com/JuliaHealth/GithubAnalytics.jl", 
+    devbranch = "main",
+    push_preview = true,
 )
