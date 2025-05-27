@@ -1,5 +1,4 @@
 # GitHubAnalytics.jl
-
 [![Stable](https://img.shields.io/badge/docs-stable-blue.svg)](https://divital-coder.github.io/GithubAnalytics.jl/stable/)
 [![Dev](https://img.shields.io/badge/docs-dev-blue.svg)](https://divital-coder.github.io/GithubAnalytics.jl/dev/)
 [![Coverage](https://codecov.io/gh/divital-coder/GithubAnalytics.jl/branch/main/graph/badge.svg)](https://codecov.io/gh/divital-coder/GithubAnalytics.jl)
