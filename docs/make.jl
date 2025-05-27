@@ -1,10 +1,10 @@
 using Documenter, DocumenterVitepress
 
 makedocs(; 
-    sitename = "GithubAnalytics.jl", 
+    sitename = "GitHubAnalytics.jl", 
     authors = "Divyansh Goyal <divital2004@gmail.com>",
     format=DocumenterVitepress.MarkdownVitepress(
-        repo = "github.com/JuliaHealth/GithubAnalytics.jl", 
+        repo = "github.com/JuliaHealth/GitHubAnalytics.jl", 
         devbranch = "main",
         devurl = "dev",
     ),
@@ -26,7 +26,7 @@ makedocs(;
 
 # This is the critical part that creates the version structure
 deploydocs(;
-    repo = "github.com/JuliaHealth/GithubAnalytics.jl", 
+    repo = "github.com/JuliaHealth/GitHubAnalytics.jl", 
     devbranch = "main",
     push_preview = true,
 )
