@@ -7,7 +7,6 @@
 GithubAnalytics.jl is a Julia package that provides comprehensive analytics for GitHub repositories and organizations. It fetches data from the GitHub API, processes metrics about repository activity, and generates visualizations and reports to help you understand repository health and contribution patterns.
 
 ## Features
-
 - **Repository Analysis**: Analyzes stars, forks, issues, pull requests, and commit history
 - **Organization-Wide Insights**: Aggregates metrics across multiple repositories 
 - **Contributor Analysis**: Identifies top contributors and contribution patterns
