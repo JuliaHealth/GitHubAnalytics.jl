@@ -1,6 +1,3 @@
-# Here goes information about integrating the MedImages API with your backend
-
-````markdown
 # API Reference
 
 ## Configuration
