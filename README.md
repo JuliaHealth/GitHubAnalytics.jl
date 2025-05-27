@@ -4,7 +4,6 @@
 [![Coverage](https://codecov.io/gh/divital-coder/GithubAnalytics.jl/branch/main/graph/badge.svg)](https://codecov.io/gh/divital-coder/GithubAnalytics.jl)
 
 ## Overview
-
 GithubAnalytics.jl is a Julia package that provides comprehensive analytics for GitHub repositories and organizations. It fetches data from the GitHub API, processes metrics about repository activity, and generates visualizations and reports to help you understand repository health and contribution patterns.
 
 ## Features
