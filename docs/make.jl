@@ -22,7 +22,7 @@ makedocs(;
 )
 
 # This is the critical part that creates the version structure
-deploydocs(;
+DocumenterVitepress.deploydocs(;
     repo = "github.com/JuliaHealth/GitHubAnalytics.jl", 
     devbranch = "main",
     push_preview = true,
